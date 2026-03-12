@@ -27,24 +27,24 @@
 
 /* 🌙 Dark Mode */
 html[data-theme="dark"] {
-  --background: #050505;
-  --foreground: #f1f5f9;
-  --accent: #7dd3fc;
-  --accent-hover: #38bdf8;
+  --background: #030303;
+  --foreground: #f8fafc;
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
   --muted: #94a3b8;
   --border: #1e293b;
-  --card: #0f172a;
+  --card: #0a0a0b;
 }
 
 /* 💠 Cyber */
 html[data-theme="cyber"] {
-  --background: #030712;
+  --background: #020204;
   --foreground: #e0f2fe;
   --accent: #00ffff;
   --accent-hover: #06b6d4;
-  --muted: #94a3b8;
-  --border: #0f172a;
-  --card: #111827;
+  --muted: #64748b;
+  --border: #111a2c;
+  --card: #080a10;
 }
 
 /* 🌸 Sakura */
@@ -60,35 +60,35 @@ html[data-theme="sakura"] {
 
 /* 💜 Violet */
 html[data-theme="violet"] {
-  --background: #0b0b14;
-  --foreground: #e2e8f0;
+  --background: #06050a;
+  --foreground: #f1f5f9;
   --accent: #a855f7;
   --accent-hover: #9333ea;
   --muted: #a1a1aa;
   --border: #2e1065;
-  --card: #1e1b4b;
+  --card: #0c0b16;
 }
 
 /* 🔥 Ember */
 html[data-theme="ember"] {
-  --background: #0f0f0f;
-  --foreground: #fefce8;
+  --background: #060606;
+  --foreground: #fffbeb;
   --accent: #f59e0b;
   --accent-hover: #f97316;
   --muted: #fcd34d;
-  --border: #78350f;
-  --card: #1c1917;
+  --border: #451a03;
+  --card: #0e0e0e;
 }
 
 /* 🌪️ Midnight */
 html[data-theme="midnight"] {
-  --background: #080010;
-  --foreground: #e5e7eb;
+  --background: #040008;
+  --foreground: #f3f4f6;
   --accent: #8b5cf6;
   --accent-hover: #7c3aed;
   --muted: #a78bfa;
   --border: #2d1b69;
-  --card: #100026;
+  --card: #080014;
 }
 
 /* 🌊 Ocean */
@@ -285,12 +285,12 @@ html[data-theme="gunmetal"] {
 /* 🖤 Midnight Black */
 html[data-theme="midnightblack"] {
   --background: #000000;
-  --foreground: #fafafa;
-  --accent: #3f3f46;
-  --accent-hover: #27272a;
-  --muted: #71717a;
-  --border: #18181b;
-  --card: #09090b;
+  --foreground: #ffffff;
+  --accent: #d1d5db;
+  --accent-hover: #9ca3af;
+  --muted: #4b5563;
+  --border: #111111;
+  --card: #050505;
 }
 
 /* 👑 Royal Blue */
@@ -328,13 +328,13 @@ html[data-theme="warzone"] {
 
 /* 🏴 Carbon Fiber */
 html[data-theme="carbon"] {
-  --background: #050505;
-  --foreground: #e5e7eb;
-  --accent: #52525b;
-  --accent-hover: #3f3f46;
-  --muted: #a1a1aa;
-  --border: #18181b;
-  --card: #0a0a0a;
+  --background: #040404;
+  --foreground: #f3f4f6;
+  --accent: #3f3f46;
+  --accent-hover: #27272a;
+  --muted: #71717a;
+  --border: #111111;
+  --card: #080808;
 }
 
 /* ================= GIRLY / CUTE THEMES ================= */

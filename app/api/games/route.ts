@@ -248,7 +248,7 @@ export async function GET() {
 
     // Featured games
     const featuredGames = filteredGames.filter((g: any) =>
-      ["mobile-legends988", "pubg-mobile138", "genshin-impact742"].includes(
+      ["mobile-legends988", "genshin-impact742", "honor-of-kings57"].includes(
         g.gameSlug
       )
     );

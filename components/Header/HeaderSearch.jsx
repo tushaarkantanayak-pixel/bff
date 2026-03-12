@@ -49,9 +49,11 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
     useEffect(() => {
         if (query.trim().length > 0) {
             const q = query.toLowerCase();
-            const filtered = allGames.filter(g =>
-                (g.gameName || g.name || "").toLowerCase().includes(q)
-            ).slice(0, 8);
+            const filtered = allGames.filter(g => {
+                const name = (g.gameName || g.name || "").toLowerCase();
+                const slug = (g.gameSlug || g.slug || "").toLowerCase();
+                return name.includes(q) || slug.includes(q);
+            }).slice(0, 8);
             setResults(filtered);
         } else {
             setResults([]);
