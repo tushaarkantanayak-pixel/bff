@@ -1,0 +1,18 @@
+"use client";
+
+import GameCardGrid from "./GameCardGrid";
+
+export default function GameGrid({ games, isOutOfStock }) {
+  return (
+    <div className="grid grid-cols-3 gap-3 md:gap-5">
+      {games.map((game, i) => (
+        <GameCardGrid
+          key={i}
+          index={i}
+          game={game}
+          isOutOfStock={isOutOfStock}
+        />
+      ))}
+    </div>
+  );
+}

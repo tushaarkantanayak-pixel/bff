@@ -1,0 +1,512 @@
+@import "tailwindcss";
+@import "./Snow.css";
+@import "./valentine.css";
+
+
+/* 🌍 Base Theme (Default Light) */
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --card: #f1f5f9;
+}
+
+/* 🧩 Tailwind variable mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+}
+
+/* 🌙 Dark Mode */
+html[data-theme="dark"] {
+  --background: #050505;
+  --foreground: #f1f5f9;
+  --accent: #7dd3fc;
+  --accent-hover: #38bdf8;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --card: #0f172a;
+}
+
+/* 💠 Cyber */
+html[data-theme="cyber"] {
+  --background: #030712;
+  --foreground: #e0f2fe;
+  --accent: #00ffff;
+  --accent-hover: #06b6d4;
+  --muted: #94a3b8;
+  --border: #0f172a;
+  --card: #111827;
+}
+
+/* 🌸 Sakura */
+html[data-theme="sakura"] {
+  --background: #fff5f8;
+  --foreground: #1f2937;
+  --accent: #ff4d94;
+  --accent-hover: #e11d74;
+  --muted: #6b7280;
+  --border: #fbcfe8;
+  --card: #ffe4ef;
+}
+
+/* 💜 Violet */
+html[data-theme="violet"] {
+  --background: #0b0b14;
+  --foreground: #e2e8f0;
+  --accent: #a855f7;
+  --accent-hover: #9333ea;
+  --muted: #a1a1aa;
+  --border: #2e1065;
+  --card: #1e1b4b;
+}
+
+/* 🔥 Ember */
+html[data-theme="ember"] {
+  --background: #0f0f0f;
+  --foreground: #fefce8;
+  --accent: #f59e0b;
+  --accent-hover: #f97316;
+  --muted: #fcd34d;
+  --border: #78350f;
+  --card: #1c1917;
+}
+
+/* 🌪️ Midnight */
+html[data-theme="midnight"] {
+  --background: #080010;
+  --foreground: #e5e7eb;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --muted: #a78bfa;
+  --border: #2d1b69;
+  --card: #100026;
+}
+
+/* 🌊 Ocean */
+html[data-theme="ocean"] {
+  --background: #f0f9ff;
+  --foreground: #0c4a6e;
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
+  --muted: #64748b;
+  --border: #bae6fd;
+  --card: #e0f2fe;
+}
+
+/* 🍃 Forest */
+html[data-theme="forest"] {
+  --background: #f0fdf4;
+  --foreground: #14532d;
+  --accent: #22c55e;
+  --accent-hover: #16a34a;
+  --muted: #6b7280;
+  --border: #bbf7d0;
+  --card: #dcfce7;
+}
+
+/* 🩸 Crimson */
+html[data-theme="crimson"] {
+  --background: #0a0000;
+  --foreground: #fecaca;
+  --accent: #dc2626;
+  --accent-hover: #991b1b;
+  --muted: #9ca3af;
+  --border: #450a0a;
+  --card: #1a0000;
+}
+
+/* 🌌 Galaxy */
+html[data-theme="galaxy"] {
+  --background: #020617;
+  --foreground: #cbd5e1;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --muted: #818cf8;
+  --border: #1e293b;
+  --card: #0f172a;
+}
+
+/* 🌅 Sunset */
+html[data-theme="sunset"] {
+  --background: #fef3c7;
+  --foreground: #78350f;
+  --accent: #f97316;
+  --accent-hover: #ea580c;
+  --muted: #92400e;
+  --border: #fed7aa;
+  --card: #ffedd5;
+}
+
+/* ❄️ Ice */
+html[data-theme="ice"] {
+  --background: #ecfeff;
+  --foreground: #083344;
+  --accent: #06b6d4;
+  --accent-hover: #0891b2;
+  --muted: #475569;
+  --border: #a5f3fc;
+  --card: #cffafe;
+}
+
+/* 🎭 Monochrome */
+html[data-theme="monochrome"] {
+  --background: #fafafa;
+  --foreground: #171717;
+  --accent: #404040;
+  --accent-hover: #262626;
+  --muted: #737373;
+  --border: #d4d4d4;
+  --card: #f5f5f5;
+}
+
+/* 🌺 Tropical */
+html[data-theme="tropical"] {
+  --background: #fffbeb;
+  --foreground: #134e4a;
+  --accent: #14b8a6;
+  --accent-hover: #0d9488;
+  --muted: #6b7280;
+  --border: #99f6e4;
+  --card: #ccfbf1;
+}
+
+/* 👾 Retro */
+html[data-theme="retro"] {
+  --background: #1a1a2e;
+  --foreground: #eee;
+  --accent: #ff006e;
+  --accent-hover: #d90368;
+  --muted: #a8dadc;
+  --border: #16213e;
+  --card: #0f3460;
+}
+
+/* ================= NEW PREMIUM THEMES ================= */
+
+/* 🟡 Solar Gold */
+html[data-theme="solar"] {
+  --background: #0b0a08;
+  --foreground: #fff7ed;
+  --accent: #fbbf24;
+  --accent-hover: #f59e0b;
+  --muted: #d6d3d1;
+  --border: #292524;
+  --card: #141210;
+}
+
+/* 🔵 Aurora */
+html[data-theme="aurora"] {
+  --background: #f8fafc;
+  --foreground: #020617;
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
+  --muted: #64748b;
+  --border: #e5e7eb;
+  --card: #ffffff;
+}
+
+/* 🟣 Neon Night */
+html[data-theme="neon-night"] {
+  --background: #020617;
+  --foreground: #e0e7ff;
+  --accent: #22d3ee;
+  --accent-hover: #06b6d4;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --card: #020b1f;
+}
+
+/* 🟤 Coffee */
+html[data-theme="coffee"] {
+  --background: #1c1917;
+  --foreground: #f5f5f4;
+  --accent: #d97706;
+  --accent-hover: #b45309;
+  --muted: #a8a29e;
+  --border: #292524;
+  --card: #292524;
+}
+
+/* 🧊 Arctic */
+html[data-theme="arctic"] {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --accent: #60a5fa;
+  --accent-hover: #3b82f6;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --card: #020b1f;
+}
+
+/* 🧬 Plasma */
+html[data-theme="plasma"] {
+  --background: #09001a;
+  --foreground: #f5f3ff;
+  --accent: #ec4899;
+  --accent-hover: #db2777;
+  --muted: #c4b5fd;
+  --border: #312e81;
+  --card: #12002e;
+}
+
+/* ================= MANLY / STRONG THEMES ================= */
+
+/* 🔩 Steel Gray */
+html[data-theme="steel"] {
+  --background: #0f172a;
+  --foreground: #e5e7eb;
+  --accent: #94a3b8;
+  --accent-hover: #64748b;
+  --muted: #cbd5f5;
+  --border: #1e293b;
+  --card: #020617;
+}
+
+/* 🛠️ Gunmetal */
+html[data-theme="gunmetal"] {
+  --background: #09090b;
+  --foreground: #e4e4e7;
+  --accent: #71717a;
+  --accent-hover: #52525b;
+  --muted: #a1a1aa;
+  --border: #18181b;
+  --card: #0f0f12;
+}
+
+/* 🖤 Midnight Black */
+html[data-theme="midnightblack"] {
+  --background: #000000;
+  --foreground: #fafafa;
+  --accent: #3f3f46;
+  --accent-hover: #27272a;
+  --muted: #71717a;
+  --border: #18181b;
+  --card: #09090b;
+}
+
+/* 👑 Royal Blue */
+html[data-theme="royalblue"] {
+  --background: #020617;
+  --foreground: #e0e7ff;
+  --accent: #4338ca;
+  --accent-hover: #3730a3;
+  --muted: #a5b4fc;
+  --border: #1e1b4b;
+  --card: #0b0f3f;
+}
+
+/* 🩸 Blood Iron */
+html[data-theme="bloodiron"] {
+  --background: #0a0000;
+  --foreground: #fee2e2;
+  --accent: #991b1b;
+  --accent-hover: #7f1d1d;
+  --muted: #fca5a5;
+  --border: #450a0a;
+  --card: #140000;
+}
+
+/* ⚔️ War Zone */
+html[data-theme="warzone"] {
+  --background: #0b0b0b;
+  --foreground: #fefce8;
+  --accent: #f97316;
+  --accent-hover: #ea580c;
+  --muted: #fdba74;
+  --border: #3f1d0b;
+  --card: #1c0a00;
+}
+
+/* 🏴 Carbon Fiber */
+html[data-theme="carbon"] {
+  --background: #050505;
+  --foreground: #e5e7eb;
+  --accent: #52525b;
+  --accent-hover: #3f3f46;
+  --muted: #a1a1aa;
+  --border: #18181b;
+  --card: #0a0a0a;
+}
+
+/* ================= GIRLY / CUTE THEMES ================= */
+
+/* 🌹 Rose Blush */
+html[data-theme="rose"] {
+  --background: #fff1f2;
+  --foreground: #3f0d1d;
+  --accent: #fb7185;
+  --accent-hover: #f43f5e;
+  --muted: #9f1239;
+  --border: #fecdd3;
+  --card: #ffe4e6;
+}
+
+/* 💜 Lavender Dream */
+html[data-theme="lavender"] {
+  --background: #f5f3ff;
+  --foreground: #2e1065;
+  --accent: #a78bfa;
+  --accent-hover: #8b5cf6;
+  --muted: #7c3aed;
+  --border: #ddd6fe;
+  --card: #ede9fe;
+}
+
+/* 🍑 Peach Glow */
+html[data-theme="peach"] {
+  --background: #fff7ed;
+  --foreground: #7c2d12;
+  --accent: #fb923c;
+  --accent-hover: #f97316;
+  --muted: #ea580c;
+  --border: #fed7aa;
+  --card: #ffedd5;
+}
+
+/* 🍬 Cotton Candy */
+html[data-theme="cotton"] {
+  --background: #fdf2f8;
+  --foreground: #831843;
+  --accent: #f472b6;
+  --accent-hover: #ec4899;
+  --muted: #db2777;
+  --border: #fbcfe8;
+  --card: #fce7f3;
+}
+
+/* 🎀 Bubblegum Pop */
+html[data-theme="bubblegum"] {
+  --background: #fff0f6;
+  --foreground: #701a75;
+  --accent: #e879f9;
+  --accent-hover: #d946ef;
+  --muted: #c026d3;
+  --border: #f5d0fe;
+  --card: #fae8ff;
+}
+
+/* 🍒 Cherry Kiss */
+html[data-theme="cherry"] {
+  --background: #fff1f2;
+  --foreground: #7f1d1d;
+  --accent: #ef4444;
+  --accent-hover: #dc2626;
+  --muted: #f87171;
+  --border: #fecaca;
+  --card: #fee2e2;
+}
+
+/* 🍦 Vanilla Cream */
+html[data-theme="vanilla"] {
+  --background: #fffbeb;
+  --foreground: #78350f;
+  --accent: #facc15;
+  --accent-hover: #eab308;
+  --muted: #ca8a04;
+  --border: #fde68a;
+  --card: #fef3c7;
+}
+
+
+/* ================= GLOBAL ================= */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Utilities */
+.border-theme {
+  border-color: var(--border);
+}
+
+.card {
+  background: var(--card);
+  color: var(--foreground);
+}
+
+/* Glow */
+.glow {
+  text-shadow: 0 0 12px var(--accent);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* ================= LOGO GLOW RING ================= */
+
+.logo-glow-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-glow-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg,
+      rgba(96, 165, 250, 0.8),
+      rgba(168, 85, 247, 0.8),
+      rgba(96, 165, 250, 0.8));
+  filter: blur(10px);
+  opacity: 0.65;
+  z-index: -1;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

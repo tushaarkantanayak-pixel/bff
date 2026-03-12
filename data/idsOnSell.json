@@ -1,0 +1,154 @@
+[
+  {
+    "id": "MLBB-1001",
+    "slug": "mlbb-mega-collector-1001",
+    "title": "Premium MLBB Account – Mega Collector Skins",
+    "price": 10999,
+    "currency": "INR",
+    "rent": {
+      "available": true,
+      "durationHours": 24,
+      "price": 99,
+      "conditions": [
+        "No email / Moonton rebind",
+        "Login only, no changes allowed",
+        "Auto logout after 24 hours"
+      ]
+    },
+    "rank": {
+      "current": "Mythic",
+      "highest": "Mythic Glory",
+      "stars": 104
+    },
+    "account": {
+      "server": "India",
+      "accountAgeYears": 3,
+      "loginType": "Moonton",
+      "rebindable": true
+    },
+    "heroes": {
+      "total": 130
+    },
+    "skins": {
+      "total": 498,
+      "legend": 3,
+      "legendList": [
+        "Alucard – Obsidian Blade",
+        "Granger – Doomsday Terminator",
+        "lunox – Celestial Empress"
+      ],
+      "grand": 6,
+      "grandList": [
+        "Gusion – 11.11",
+        "Vaxana – Zenith",
+        "Karina – Kof",
+        "thamuz-kunfu panda"
+      ],
+      "exquisite": 12,
+      "exquisiteList": [
+        "Aldous – Mecha Storm",
+        "Bruno – All-Star",
+        "Chou – Dragon Fist",
+        "Cyclops – Astro Wizard",
+        "Fanny – Cybernetic"
+      ],
+      "epic": 42,
+      "collector": [
+        "Natalia Collector",
+        "pharsha Collector"
+      ],
+      "rare": [
+        "Aldos-M1"
+      ]
+    },
+    "diamonds": {
+      "balance": 300,
+      "doubleDiamondAvailable": [
+        50,
+        150,
+        250,
+        500
+      ]
+    },
+    "currencies": {
+      "coa": 200,
+      "magicCore": 121
+    },
+    "cosmetics": {
+      "epicRecall": true,
+      "exclusiveRecalls": true,
+      "exclusiveSpawnEffects": true,
+      "exclusiveEliminationEffects": true
+    },
+    "collection": {
+      "points": 164000,
+      "tier": "Mega Collector V"
+    },
+    "heroTitles": {
+      "global": [
+        {
+          "hero": "Ling",
+          "rank": ""
+        },
+        {
+          "hero": "Hayabusa",
+          "rank": ""
+        }
+      ],
+      "supreme": [
+        "Ling"
+      ]
+    },
+    "availability": {
+      "status": "available",
+      "holdAllowed": true
+    },
+    "dealer": {
+      "owner": "TK",
+      "contact": {
+        "whatsapp": "https://wa.me/9178521537",
+        "telegram": null,
+        "instagram": null
+      }
+    },
+    "resellers": [
+      {
+        "name": "ResellerOne",
+        "contact": "https://wa.me/9178521537"
+      }
+    ],
+    "media": {
+      "images": [],
+      "fallbackImage": "/logo.png"
+    },
+    "highlights": [
+      "Mythic Glory 104★",
+      "2 Collector Skins",
+      "Epic Recall",
+      "Mega Collector V",
+      "Advanced Server avaliable"
+    ],
+    "others": [
+      {
+        "key": "Squad Skins",
+        "value": "Available"
+      },
+      {
+        "key": "Battle Emotes",
+        "value": "Multiple"
+      },
+      {
+        "key": "Sacred Statues",
+        "value": "Included"
+      }
+    ],
+    "meta": {
+      "verifiedByAdmin": true,
+      "createdAt": "2025-01-05",
+      "updatedAt": "2025-01-10",
+      "views": 0,
+      "shares": 0
+    },
+    "description": "High value MLBB account with rare collector skins, global hero titles, and premium inventory."
+  }
+]
