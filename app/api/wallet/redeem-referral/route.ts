@@ -89,8 +89,8 @@ export async function POST(req: Request) {
         }
 
         // ============ PROCESS REWARD ============
-        // 1 Coin Reward
-        const REWARD_AMOUNT = 1;
+        // 0 Coin Reward
+        const REWARD_AMOUNT = 0;
 
         // 🔒 ATOMIC UPDATE: Prevent Race Conditions
         // Only update if referralUsed is FALSE
@@ -162,7 +162,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({
             success: true,
-            message: "Referral code redeemed! 1 coin added to your wallet.",
+            message: "Referral code redeemed! 0 coin added to your wallet.",
             newBalance: updatedUser.wallet
         });
 
