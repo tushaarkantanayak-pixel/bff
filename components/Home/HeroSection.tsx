@@ -25,7 +25,7 @@ export default function HeroSection() {
         <FlashSale />
       </div>
 
-      <PromoBanner />
+      {/* <PromoBanner /> */}
 
       <div className="space-y-2">
         <HomeQuickActions />
