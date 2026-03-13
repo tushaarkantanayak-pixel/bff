@@ -8,8 +8,8 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/api/", "/_next/", "/admin", "/dashboard", "/dashboard/"],
     },
     sitemap: [
-      "https://mlbbtopup.in/sitemap.xml",
-      "https://mlbbtopup.in/sitemap.txt",
+      "https://bluebuff.in/sitemap.xml",
+      "https://bluebuff.in/sitemap.txt",
     ],
 
   };

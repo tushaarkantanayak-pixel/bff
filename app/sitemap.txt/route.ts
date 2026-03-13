@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export const revalidate = 3600; // Revalidate every hour
 
 export async function GET() {
-    const baseUrl = "https://mlbbtopup.in";
+    const baseUrl = "https://bluebuff.in";
 
     // 1. Static Routes (Must match sitemap.ts)
     const staticUrls = [

@@ -20,16 +20,40 @@ import MaintenanceWrapper from "@/components/Layout/MaintenanceWrapper";
 import { FEATURE_FLAGS } from "@/lib/featureFlags";
 import { getAppSettings } from "@/lib/settings";
 import BottomNav from "@/components/Layout/BottomNav";
+import JsonLd from "@/components/Seo/JsonLd";
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Bluebuff",
+  "url": "https://bluebuff.in",
+  "logo": "https://bluebuff.in/logoBB.png",
+  "sameAs": [
+    "https://facebook.com/bluebuff", // Replace with real links if available
+    "https://instagram.com/bluebuff.in",
+    "https://twitter.com/bluebuff_in"
+  ],
+};
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Bluebuff",
+  "url": "https://bluebuff.in",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://bluebuff.in/games?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
 
 export const metadata: Metadata = {
   title: {
-    default: "MLBB Topup India | Buy MLBB Diamonds Instantly",
-    template: "%s | MLBB Topup India",
+    default: "Bluebuff | Buy MLBB Diamonds Instantly in India",
+    template: "%s | Bluebuff",
   },
   description:
-    "MLBB Topup India – Buy Mobile Legends diamonds instantly with fast delivery, secure payments, and best prices. Trusted MLBB diamond top-up platform.",
+    "Bluebuff – India's most trusted gaming top-up platform. Buy Mobile Legends diamonds instantly with fast delivery and secure payments at best prices.",
   keywords: [
     "mlbb topup",
     "mlbb topup india",
@@ -38,20 +62,54 @@ export const metadata: Metadata = {
     "buy mlbb diamonds",
     "mobile legends topup",
     "mlbb diamonds india",
+    "bluebuff",
+    "bluebuff india",
+    "bluebuff mlbb",
   ],
-  metadataBase: new URL("https://mlbbtopup.in"),
+  metadataBase: new URL("https://bluebuff.in"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "MLBB Topup India | Buy MLBB Diamonds Instantly",
+    title: "Bluebuff | Buy MLBB Diamonds Instantly in India",
     description:
-      "Instant MLBB diamond top-up in India. Secure payments, fast delivery, and best prices.",
-    url: "https://mlbbtopup.in",
-    siteName: "MLBB Topup India",
+      "Instant MLBB diamond top-up in India. Secure payments, fast delivery, and best prices at Bluebuff.",
+    url: "https://bluebuff.in",
+    siteName: "Bluebuff",
+    images: [
+      {
+        url: "/logoBB.png",
+        width: 1200,
+        height: 630,
+        alt: "Bluebuff - Gaming Topup India",
+      },
+    ],
+    locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bluebuff | Buy MLBB Diamonds Instantly in India",
+    description: "Instant MLBB diamond top-up in India. Secure payments, fast delivery, and best prices at Bluebuff.",
+    images: ["/logoBB.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/logoBB.png",
+  },
+  manifest: "/manifest.json",
 };
 
 const poppins = Poppins({
@@ -72,6 +130,8 @@ export default async function RootLayout({
 
 
       <body className="bg-black text-white">
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
           <Header />
 

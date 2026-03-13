@@ -107,8 +107,8 @@ export default function SocialFloat() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "topupmlbb.in",
-          text: "Check out this awesome MLBB top-up site!",
+          title: "bluebuff.in",
+          text: "Check out Bluebuff for amazing game top-ups!",
           url: window.location.href,
         });
       } catch { }

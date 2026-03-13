@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "MLBB Topup India | Buy MLBB Diamonds Instantly",
-        template: "%s | MLBB Topup India",
+        default: "Bluebuff | Buy MLBB Diamonds Instantly",
+        template: "%s | Bluebuff",
     },
     description:
-        "MLBB Topup India – Buy Mobile Legends diamonds instantly with fast delivery, secure payments, and best prices. Trusted MLBB diamond top-up platform.",
+        "Bluebuff – Buy Mobile Legends diamonds instantly with fast delivery, secure payments, and best prices. India's trusted gaming top-up platform.",
     keywords: [
         "mlbb topup",
         "mlbb topup india",
@@ -16,14 +16,16 @@ export const metadata: Metadata = {
         "buy mlbb diamonds",
         "mobile legends topup",
         "mlbb diamonds india",
+        "bluebuff",
+        "bluebuff topup",
     ],
-    metadataBase: new URL("https://mlbbtopup.in"),
+    metadataBase: new URL("https://bluebuff.in"),
     openGraph: {
-        title: "MLBB Topup India | Buy MLBB Diamonds Instantly",
+        title: "Bluebuff | Buy MLBB Diamonds Instantly",
         description:
-            "Instant MLBB diamond top-up in India. Secure payments, fast delivery, and best prices.",
-        url: "https://mlbbtopup.in",
-        siteName: "MLBB Topup India",
+            "Instant MLBB diamond top-up in India. Secure payments, fast delivery, and best prices at Bluebuff.",
+        url: "https://bluebuff.in",
+        siteName: "Bluebuff",
         type: "website",
     },
     robots: {

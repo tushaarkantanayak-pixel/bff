@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 export const revalidate = 3600; // Revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://mlbbtopup.in";
+  const baseUrl = "https://bluebuff.in";
   const now = new Date();
 
   // 1. Fixed Static Routes

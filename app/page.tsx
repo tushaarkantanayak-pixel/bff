@@ -3,9 +3,9 @@ import HomeSection from "@/components/Home/Home";
 import WhatsAppQRPopup from "@/components/WhatsAppQRPopup";
 
 export const metadata = {
-  title: "MLBB Topup India | Buy MLBB Diamonds Instantly at Best Price",
+  title: "Bluebuff | Buy MLBB Diamonds Instantly at Best Price in India",
   description:
-    "MLBB Topup India – Buy Mobile Legends diamonds instantly with fast delivery, secure payments, and best prices. Trusted MLBB diamond top-up platform in India.",
+    "Bluebuff – Buy Mobile Legends diamonds instantly with fast delivery, secure payments, and best prices. India's most trusted MLBB diamond top-up platform.",
   keywords: [
     "mlbb topup",
     "mlbb topup india",
@@ -15,6 +15,8 @@ export const metadata = {
     "mobile legends topup",
     "mlbb diamonds india",
     "cheap mlbb diamonds",
+    "bluebuff",
+    "bluebuff topup",
   ],
 };
 
