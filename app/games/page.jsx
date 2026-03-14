@@ -178,7 +178,7 @@ export default function GamesPage() {
               <input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search Armory..."
+                placeholder="Search items..."
                 className="w-full pl-11 pr-10 py-3 rounded-2xl bg-[var(--background)]/40 border border-transparent focus:bg-[var(--background)]/80 focus:border-[var(--accent)]/30 outline-none text-xs font-bold tracking-wide transition-all placeholder:text-[var(--muted)]/40"
               />
               <AnimatePresence>
@@ -266,7 +266,7 @@ export default function GamesPage() {
                 {processedFeaturedGames.length > 0 && (
                   <div className="mb-20">
                     <SectionHeader
-                      title="Elite Picks"
+                      title="Featured Games"
                       icon={FiTrendingUp}
                       count={processedFeaturedGames.length}
                       gradient="from-yellow-400 to-orange-600"
@@ -298,7 +298,7 @@ export default function GamesPage() {
                 {processedGames.length > 0 && (
                   <div className="mb-20">
                     <SectionHeader
-                      title="Full Armory"
+                      title="All Games"
                       icon={FiPackage}
                       count={processedGames.length}
                       gradient="from-[var(--accent)] to-purple-600"

@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:block", autoFocus = false, onClose }) {
+export default function HeaderSearch({ className = "max-w-md mx-4 hidden lg:block", autoFocus = false, onClose }) {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const [isFocused, setIsFocused] = useState(false);
@@ -118,7 +118,7 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
                         onFocus={handleFocus}
                         onKeyDown={handleKeyDown}
                         autoFocus={autoFocus}
-                        placeholder="Search Armory..."
+                        placeholder="Search items..."
                         className="w-full bg-transparent border-none outline-none px-3 py-2.5 text-[11px] font-black text-[var(--foreground)] placeholder:text-[var(--muted)]/40 tracking-widest uppercase italic"
                     />
                     <AnimatePresence>
@@ -138,12 +138,12 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
             </div>
 
             <AnimatePresence>
-                {isFocused && (query.trim() || loading) && (
+                {isFocused && query.trim() && (
                     <motion.div
                         initial={{ opacity: 0, y: 15, scale: 0.98, filter: "blur(10px)" }}
                         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
                         exit={{ opacity: 0, y: 15, scale: 0.98, filter: "blur(10px)" }}
-                        className="absolute top-full mt-3 left-0 right-0 bg-[var(--background)]/95 backdrop-blur-3xl border border-[var(--border)] rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden z-[1001]"
+                        className="absolute top-full mt-3 -left-2 -right-2 sm:-left-6 sm:-right-6 bg-[var(--background)]/95 backdrop-blur-3xl border border-[var(--border)] rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden z-[1001]"
                     >
                         <div className="p-3 space-y-1">
                             {loading ? (
@@ -154,12 +154,12 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
                                             <FiZap size={20} className="text-[var(--accent)] animate-pulse" />
                                         </div>
                                     </div>
-                                    <p className="text-[9px] font-black text-[var(--muted)] mt-4 uppercase tracking-[0.3em] italic">Accessing Central Database...</p>
+                                    <p className="text-[9px] font-black text-[var(--muted)] mt-4 uppercase tracking-[0.3em]">Loading...</p>
                                 </div>
                             ) : results.length > 0 ? (
                                 <>
                                     <div className="px-4 py-2 flex items-center justify-between">
-                                        <span className="text-[9px] font-black text-[var(--accent)] uppercase tracking-[0.2em] italic">Intelligence Found</span>
+                                        <span className="text-[9px] font-black text-[var(--accent)] uppercase tracking-[0.2em]">Results</span>
                                         <span className="text-[8px] font-bold text-[var(--muted)] uppercase">{results.length} Results</span>
                                     </div>
                                     <div className="space-y-1 max-h-[400px] overflow-y-auto no-scrollbar">
@@ -181,7 +181,7 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
                                                     </span>
                                                     <div className="flex items-center gap-2">
                                                         <span className={`text-[8px] font-bold uppercase tracking-widest ${selectedIndex === idx ? 'text-black/60' : 'text-[var(--muted)]'}`}>
-                                                            {item.isOtt ? 'Streaming' : item.isMembership ? 'Prime Access' : (item.gameFrom || 'Central Hub')}
+                                                            {item.isOtt ? 'Subscription' : item.isMembership ? 'Membership' : (item.gameFrom || 'Game')}
                                                         </span>
                                                         {item.tagId && (
                                                             <span className="text-[7px] font-black px-1.5 py-0.5 rounded bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 uppercase">
@@ -202,7 +202,7 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
                                         }}
                                         className="flex items-center justify-center p-4 text-[10px] font-black text-[var(--muted)] hover:text-[var(--accent)] transition-all duration-300 border-t border-[var(--border)] mt-2 uppercase tracking-[0.2em] italic gap-3 group/link"
                                     >
-                                        Explore All Protocols
+                                        View All Results
                                         <div className="w-5 h-5 rounded-lg bg-[var(--foreground)]/5 flex items-center justify-center group-hover/link:bg-[var(--accent)] group-hover/link:text-black transition-colors">
                                             <FiTarget size={10} />
                                         </div>
@@ -213,8 +213,8 @@ export default function HeaderSearch({ className = "max-w-sm mx-4 hidden lg:bloc
                                     <div className="w-16 h-16 rounded-[2rem] bg-red-500/5 border border-red-500/10 flex items-center justify-center mb-6">
                                         <FiX size={24} className="text-red-500/40" />
                                     </div>
-                                    <h3 className="text-sm font-black uppercase tracking-tighter italic text-[var(--foreground)] mb-2">Signal Interrupted</h3>
-                                    <p className="text-[10px] text-[var(--muted)] font-bold uppercase tracking-widest leading-relaxed"> No fragments detected for <br /><span className="text-[var(--accent)]">"{query}"</span></p>
+                                    <h3 className="text-sm font-black uppercase tracking-tighter text-[var(--foreground)] mb-2">No Results</h3>
+                                    <p className="text-[10px] text-[var(--muted)] font-bold uppercase tracking-widest leading-relaxed"> No items found for <br /><span className="text-[var(--accent)]">"{query}"</span></p>
                                 </div>
                             )}
                         </div>
