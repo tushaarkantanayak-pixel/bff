@@ -3,75 +3,66 @@
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { FiHome, FiCreditCard, FiShoppingBag, FiUsers, FiHeadphones, FiMessageSquare, FiGrid, FiTarget, FiGift } from "react-icons/fi";
-
-import { useUIStore } from "@/store/useUIStore";
+import { FiHome, FiCreditCard, FiGrid, FiTarget, FiShoppingBag, FiGift, FiHeadphones } from "react-icons/fi";
 
 const BottomNav = () => {
     const pathname = usePathname();
     const router = useRouter();
-    const { toggleChatbot, isChatbotOpen } = useUIStore();
 
     // Hide BottomNav on certain pages if needed
     const hideOnRoutes = ["/admin", "/owner"];
     if (hideOnRoutes.some(route => pathname?.startsWith(route))) return null;
 
     const navItems = [
-        { label: "Wallet", icon: FiCreditCard, path: "/dashboard/wallet", action: () => router.push("/dashboard/wallet") },
-        { label: "Redeem", icon: FiGift, path: "/dashboard/redeem", action: () => router.push("/dashboard/redeem") },
-        { label: "Games", icon: FiGrid, path: "/games", action: () => router.push("/games") },
-        { label: "Region", icon: FiTarget, path: "/region", action: () => router.push("/region") },
-        { label: "Home", icon: FiHome, path: "/", isHome: true, action: () => router.push("/") },
-        { label: "Orders", icon: FiShoppingBag, path: "/dashboard/orders", action: () => router.push("/dashboard/orders") },
-        { label: "Referral", icon: FiUsers, path: "/dashboard/referral", action: () => router.push("/dashboard/referral") },
-        { label: "Support", icon: FiHeadphones, path: "/dashboard/support", action: () => router.push("/dashboard/support") },
-        { label: "AI Chat", icon: FiMessageSquare, action: () => toggleChatbot() },
+        { id: "home", label: "Home", icon: FiHome, path: "/", isHome: true, action: () => router.push("/") },
+        { id: "games", label: "Games", icon: FiGrid, path: "/games", action: () => router.push("/games") },
+        { id: "region", label: "Region", icon: FiTarget, path: "/region", action: () => router.push("/region") },
+        { id: "orders", label: "Orders", icon: FiShoppingBag, path: "/dashboard/orders", action: () => router.push("/dashboard/orders") },
+        { id: "wallet", label: "Wallet", icon: FiCreditCard, path: "/dashboard/wallet", action: () => router.push("/dashboard/wallet") },
+        { id: "redeem", label: "Redeem", icon: FiGift, path: "/dashboard/redeem", action: () => router.push("/dashboard/redeem") },
+        { id: "support", label: "Support", icon: FiHeadphones, path: "/dashboard/support", action: () => router.push("/dashboard/support") },
     ];
 
     return (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-[var(--card)]/80 backdrop-blur-2xl border-t border-[var(--border)] pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
-            <div className="flex items-center justify-around h-14 px-1">
-                {navItems.map((item, idx) => {
-                    const isActive = item.label === "AI Chat"
-                        ? isChatbotOpen
-                        : item.isHome
-                            ? (pathname === "/" || pathname === "/home")
-                            : (item.path && (pathname === item.path || pathname.startsWith(item.path + "/")));
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] px-1 pb-1 pointer-events-none">
+            <div className="pointer-events-auto bg-[var(--card)]/80 backdrop-blur-2xl border border-[var(--border)] rounded-[1.2rem] shadow-[0_8px_30px_rgba(0,0,0,0.6)] py-1 flex justify-between items-center w-full">
+                {navItems.map((item) => {
+                    const isActive = item.isHome
+                        ? (pathname === "/" || pathname === "/home" || pathname === "")
+                        : (item.path && (pathname === item.path || pathname.startsWith(item.path + "/")));
 
                     const Icon = item.icon;
 
-                    if (item.isHome) {
-                        return (
-                            <div key={idx} className="relative -top-3.5 flex-shrink-0">
-                                <motion.button
-                                    onClick={item.action}
-                                    whileTap={{ scale: 0.9 }}
-                                    className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-[3px] border-[var(--card)] transition-all duration-300 ${isActive
-                                        ? "bg-[var(--accent)] text-white"
-                                        : "bg-[var(--foreground)] text-[var(--background)]"
-                                        }`}
-                                >
-                                    <Icon className="text-xl" />
-                                </motion.button>
-                                {isActive && (
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--accent)] rounded-full shadow-[0_0_5px_var(--accent)]" />
-                                )}
-                            </div>
-                        );
-                    }
-
                     return (
                         <button
-                            key={idx}
+                            key={item.id}
                             onClick={item.action}
-                            className="flex flex-col items-center justify-center gap-0.5 w-10 transition-all active:scale-90"
+                            className="relative flex flex-col items-center justify-center flex-1 h-9 px-0.5 group focus:outline-none"
                         >
-                            <div className={`transition-colors duration-300 ${isActive ? "text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--foreground)]"}`}>
-                                <Icon className="text-base" />
+                            <div className="relative z-10 flex flex-col items-center justify-center gap-0.5 w-full">
+                                <Icon
+                                    size={14}
+                                    className={`transition-all duration-300 ${isActive
+                                            ? "text-[var(--accent)] drop-shadow-[0_0_8px_rgba(var(--accent-rgb),0.8)]"
+                                            : "text-[var(--muted)] group-hover:text-[var(--foreground)]"
+                                        }`}
+                                />
+
+                                <span className={`text-[6px] font-black uppercase tracking-widest whitespace-nowrap transition-all duration-300 scale-90 ${isActive
+                                        ? "text-[var(--foreground)] opacity-100"
+                                        : "text-[var(--muted)] opacity-50 group-hover:opacity-90"
+                                    }`}>
+                                    {item.label}
+                                </span>
                             </div>
-                            <span className={`text-[6px] font-black uppercase tracking-tighter truncate w-full text-center ${isActive ? "text-[var(--foreground)]" : "text-[var(--muted)]/60"}`}>
-                                {item.label}
-                            </span>
+
+                            {isActive && (
+                                <motion.div
+                                    layoutId="bottomNavIndicatorSimple"
+                                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    className="absolute inset-0 mx-0.5 bg-[var(--accent)]/10 rounded-lg"
+                                />
+                            )}
                         </button>
                     );
                 })}

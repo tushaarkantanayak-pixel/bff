@@ -401,57 +401,34 @@ export default function Header() {
                             <Link
                               href="/owner-panal"
                               onClick={() => setUserMenuOpen(false)}
-                              className="flex items-center justify-between p-5 rounded-[2rem] bg-gradient-to-br from-[var(--accent)] to-orange-600 text-white shadow-[0_20px_40px_-10px_rgba(var(--accent-rgb),0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all mt-6 group overflow-hidden relative border border-white/10"
+                              className="relative flex items-center p-4 rounded-2xl bg-[var(--foreground)]/[0.03] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/5 transition-all mt-6 group overflow-hidden"
                             >
-                              {/* Shimmer Effect */}
-                              <motion.div
-                                animate={{ x: [-300, 300] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-20 pointer-events-none"
-                              />
+                              {/* Left Accent Bar */}
+                              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)]/50 group-hover:bg-[var(--accent)] transition-colors shadow-[0_0_10px_var(--accent)] group-hover:shadow-[0_0_20px_var(--accent)]" />
 
-                              <div className="flex items-center gap-4 relative z-10">
+                              <div className="flex items-center gap-3 relative z-10 w-full pl-2">
                                 <div className="relative flex-shrink-0">
-                                  <div className="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
-                                    <FiZap size={22} className="text-white drop-shadow-lg" />
+                                  <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center border border-[var(--accent)]/20 group-hover:bg-[var(--accent)] group-hover:shadow-[0_0_15px_rgba(var(--accent-rgb),0.5)] transition-all duration-300">
+                                    <FiZap size={18} className="text-[var(--accent)] group-hover:text-black transition-colors" />
                                   </div>
-                                  <div className="absolute -top-1 -right-1 flex h-3 w-3">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                                  <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[var(--background)] group-hover:animate-pulse" />
+                                </div>
+
+                                <div className="flex flex-col flex-1 min-w-0">
+                                  <h4 className="text-xs font-black uppercase tracking-[0.1em] text-[var(--foreground)] mb-1 group-hover:text-[var(--accent)] transition-colors">Admin Console</h4>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-[8px] font-bold text-[var(--accent)] uppercase tracking-widest bg-[var(--accent)]/10 px-1.5 py-0.5 rounded border border-[var(--accent)]/20">Elite Access</span>
+                                    <span className="text-[8px] font-medium text-[var(--muted)] uppercase tracking-widest">System Online</span>
                                   </div>
                                 </div>
 
-                                <div className="flex flex-col min-w-0">
-                                  <h4 className="text-sm font-black uppercase tracking-widest leading-none mb-2">Admin Console</h4>
-                                  <div className="flex flex-wrap items-center gap-2">
-                                    <span className="text-[8px] font-black bg-black/30 px-2 py-0.5 rounded-md border border-white/10 whitespace-nowrap">ELITE ACCESS</span>
-                                    <span className="text-[9px] font-bold opacity-80 whitespace-nowrap">System Active</span>
-                                  </div>
+                                <div className="w-8 h-8 rounded-full bg-[var(--foreground)]/5 flex items-center justify-center text-[var(--muted)] group-hover:bg-[var(--accent)] group-hover:text-black group-hover:translate-x-1 transition-all flex-shrink-0">
+                                  <FiChevronRight size={16} />
                                 </div>
-                              </div>
-
-                              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors relative z-10 flex-shrink-0">
-                                <FiChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                               </div>
                             </Link>
                           )}
                         </>
-                      )}
-                    </div>
-
-                    <div className="relative z-10 p-5 bg-[var(--foreground)]/[0.01] border-t border-[var(--border)] flex flex-col gap-3 mt-auto">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
-                          <span className="text-[10px] font-medium text-[var(--muted)]">Status: Operational</span>
-                        </div>
-                        <span className="text-[9px] font-mono text-[var(--muted)] opacity-20 tracking-wider font-bold">v3.1.2B</span>
-                      </div>
-
-                      {user && (
-                        <div className="text-[9px] font-medium text-[var(--muted)] italic opacity-40 leading-tight px-1 text-center">
-                          "Welcome back, Hero. Your next legendary victory starts with a single top-up. We're here to power your journey."
-                        </div>
                       )}
                     </div>
                   </motion.div>
@@ -496,6 +473,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </motion.header >
   );
 }

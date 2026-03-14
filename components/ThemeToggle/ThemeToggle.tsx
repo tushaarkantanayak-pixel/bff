@@ -150,10 +150,10 @@ export default function ThemeToggle() {
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.95, y: 10, filter: "blur(10px)" }}
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="fixed top-24 left-1/2 -translate-x-1/2 w-[90vw] max-w-[340px] md:absolute md:top-full md:left-auto md:right-0 md:translate-x-0 md:mt-3 md:w-80 bg-[#0f0f11]/95 backdrop-blur-xl rounded-[24px] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-[100]"
             >
               {/* DECORATIVE ELEMENTS */}
@@ -175,21 +175,10 @@ export default function ThemeToggle() {
 
               {/* SCROLLABLE GRID */}
               <div className="px-3 pb-3 max-h-[320px] overflow-y-auto custom-scrollbar">
-                <motion.div
-                  className="grid grid-cols-2 gap-2"
-                  initial="hidden"
-                  animate="visible"
-                  variants={{
-                    visible: { transition: { staggerChildren: 0.03 } }
-                  }}
-                >
+                <div className="grid grid-cols-2 gap-2">
                   {themes.map((t) => (
-                    <motion.button
+                    <button
                       key={t.id}
-                      variants={{
-                        hidden: { opacity: 0, y: 10 },
-                        visible: { opacity: 1, y: 0 }
-                      }}
                       onClick={() => changeTheme(t.id)}
                       className={`relative group overflow-hidden flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all duration-300 border ${theme === t.id
                         ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-[0_4px_12px_rgba(var(--accent-rgb),0.3)]"
@@ -212,14 +201,11 @@ export default function ThemeToggle() {
                       </div>
 
                       {theme === t.id && (
-                        <motion.div
-                          layoutId="active-dot"
-                          className="absolute right-2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_5px_white]"
-                        />
+                        <div className="absolute right-2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_5px_white]" />
                       )}
-                    </motion.button>
+                    </button>
                   ))}
-                </motion.div>
+                </div>
               </div>
 
               {/* STATUS FOOTER */}

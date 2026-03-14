@@ -49,18 +49,18 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="relative mt-8 bg-[var(--background)] border-t border-[var(--border)] pt-12 pb-6 overflow-hidden">
+    <footer className="relative mt-4 bg-[var(--background)] border-t border-[var(--border)] pt-8 pb-4 overflow-hidden">
       {/* Subtle Ambient Lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/20 to-transparent" />
       <div className="absolute bottom-0 left-[10%] w-[30%] h-[100px] bg-[var(--accent)]/5 rounded-full blur-[90px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
 
           {/* BRAND BLOCK - REFINED SPACE */}
-          <div className="md:col-span-4 space-y-6">
+          <div className="md:col-span-4 space-y-4">
             <Link href="/" className="group block">
-              <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
+              <h2 className="text-2xl md:text-3xl font-black italic tracking-tighter uppercase leading-none bg-gradient-to-r from-[var(--accent)] via-[var(--foreground)] to-[var(--accent)] bg-clip-text text-transparent group-hover:brightness-110 transition-all">
                 {BRAND}
               </h2>
               <p className="mt-3 text-[10px] font-black uppercase tracking-[0.3em] opacity-40 italic leading-relaxed max-w-[260px]">
@@ -74,12 +74,12 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02, x: 4 }}
-              className="flex items-center gap-4 p-3.5 rounded-2xl bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all border-dashed group"
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all border-dashed group w-full max-w-[240px]"
             >
-              <div className="bg-white p-1 rounded-lg shadow-sm group-hover:rotate-2 transition-transform">
+              <div className="bg-white p-1 rounded-md shadow-sm group-hover:rotate-2 transition-transform">
                 <QRCodeCanvas
                   value={TRUSTPILOT_URL}
-                  size={42}
+                  size={32}
                   bgColor="#ffffff"
                   fgColor="#000000"
                   level="Q"
@@ -99,9 +99,9 @@ export default function Footer() {
           </div>
 
           {/* LINKS GRID - SYMMETRICAL */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-4">
+          <div className="md:col-span-5 grid grid-cols-2 gap-2">
             {FOOTER_LINKS.map((section) => (
-              <div key={section.title} className="space-y-4">
+              <div key={section.title} className="space-y-2.5">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-[1px] bg-[var(--accent)]/40 rounded-full" />
                   <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
@@ -125,8 +125,8 @@ export default function Footer() {
           </div>
 
           {/* CONNECT & ACTION BLOCK */}
-          <div className="md:col-span-3 flex flex-col md:items-end gap-8">
-            <div className="space-y-4 md:text-right">
+          <div className="md:col-span-3 flex flex-col md:items-end gap-6">
+            <div className="space-y-2 md:text-right">
               <h3 className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--accent)]/80 italic">
                 Connect
               </h3>
@@ -160,7 +160,7 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM STRIP - HIGH-END DENSITY */}
-        <div className="pt-6 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-5 opacity-60">
+        <div className="pt-4 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-3 opacity-60">
           <div className="flex items-center gap-3 group/india cursor-default">
             <div className="flex gap-1">
               <div className="w-1 h-3 bg-[#FF9933] rounded-full shadow-[0_0_8px_#FF9933]" />
@@ -178,7 +178,7 @@ export default function Footer() {
         </div>
 
         {/* COPYRIGHT SUB-STRIP */}
-        <div className="mt-6 text-center opacity-20">
+        <div className="mt-4 text-center opacity-20">
           <span className="text-[8px] font-black uppercase tracking-[0.2em] italic">
             © {new Date().getFullYear()} {BRAND.toUpperCase()} • ALL RIGHTS RESERVED
           </span>
