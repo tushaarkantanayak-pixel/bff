@@ -53,8 +53,10 @@ export const metadata: Metadata = {
     template: "%s | Bluebuff",
   },
   description:
-    "Bluebuff – India's most trusted gaming top-up platform. Buy Mobile Legends diamonds instantly with fast delivery and secure payments at best prices.",
+    "Bluebuff is India's most trusted gaming top-up platform. Buy Mobile Legends (MLBB) diamonds, BGMI UCs, and other game credits instantly with fast delivery, secure payments, and best prices.",
   keywords: [
+    "game topup",
+    "game recharge india",
     "mlbb topup",
     "mlbb topup india",
     "mlbb diamond topup",
@@ -62,6 +64,8 @@ export const metadata: Metadata = {
     "buy mlbb diamonds",
     "mobile legends topup",
     "mlbb diamonds india",
+    "bgmi uc topup",
+    "cheap topup website",
     "bluebuff",
     "bluebuff india",
     "bluebuff mlbb",

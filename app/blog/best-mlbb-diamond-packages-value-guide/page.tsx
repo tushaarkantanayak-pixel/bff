@@ -4,7 +4,7 @@ import BlogPostLayout from "@/components/Blog/BlogPostLayout";
 export const metadata: Metadata = {
     title: "Best MLBB Diamond Packages in India – Real Price & Value Guide (2026)",
     description: "Actual MLBB diamond prices in India with real cost-per-diamond breakdown. Find out which package gives you maximum value for your rupee in 2026.",
-    alternates: { canonical: "https://mlbbtopup.in/blog/best-mlbb-diamond-packages-value-guide" },
+    alternates: { canonical: "https://bluebuff.in/blog/best-mlbb-diamond-packages-value-guide" },
 };
 
 // All prices sourced directly from the MLBB in-app store for India (INR), 2026

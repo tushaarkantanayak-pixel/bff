@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Is MLBB Top-Up Legal in India? (Complete 2025 Guide)",
   description: "Is MLBB top-up legal in India? Learn the legality of Mobile Legends diamond recharge, safety rules, and secure methods.",
-  alternates: { canonical: "https://mlbbtopup.in/blog/is-mlbb-top-up-legal-in-india" },
+  alternates: { canonical: "https://bluebuff.in/blog/is-mlbb-top-up-legal-in-india" },
 };
 
 export default function BlogPage() {

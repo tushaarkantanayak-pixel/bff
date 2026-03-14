@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "How to Buy MLBB Diamonds Safely in India (2025 Guide)",
   description: "Learn how to buy MLBB diamonds safely in India. Avoid scams, use trusted platforms, and recharge safely.",
-  alternates: { canonical: "https://mlbbtopup.in/blog/how-to-buy-mlbb-diamonds-safely-in-india" },
+  alternates: { canonical: "https://bluebuff.in/blog/how-to-buy-mlbb-diamonds-safely-in-india" },
 };
 
 export default function BlogPage() {
@@ -52,7 +52,7 @@ export default function BlogPage() {
 
       <h2>Choose a Trusted Store</h2>
       <p>
-        Platforms like <Link href="/games/mobile-legends988" className="text-[var(--accent)] underline transition-opacity">mlbbtopup.in</Link> offer:
+        Platforms like <Link href="/games/mobile-legends988" className="text-[var(--accent)] underline transition-opacity">bluebuff.in</Link> offer:
       </p>
       <ul>
         <li>Instant delivery to your game account</li>

@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "MLBB Weekly Pass Price in India (Updated 2025)",
   description: "Check the latest MLBB weekly pass price in India (2025). Learn benefits, rewards, validity, and safe buying guide.",
-  alternates: { canonical: "https://mlbbtopup.in/blog/mlbb-weekly-pass-price-in-india" },
+  alternates: { canonical: "https://bluebuff.in/blog/mlbb-weekly-pass-price-in-india" },
 };
 
 export default function BlogPage() {

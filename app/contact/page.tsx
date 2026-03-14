@@ -59,7 +59,7 @@ export default function ContactPage() {
               <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--muted)] opacity-60 mb-6">Social Network</h2>
               <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: FaInstagram, link: "https://www.instagram.com/mlbbtopup.in", label: "INSTAGRAM" },
+                  { icon: FaInstagram, link: "https://www.instagram.com/bluebuff.in", label: "INSTAGRAM" },
                   { icon: FaTwitter, link: "https://x.com/tk_dev_", label: "TWITTER" },
                 ].map((social, i) => (
                   <a

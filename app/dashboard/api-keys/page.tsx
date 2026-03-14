@@ -441,7 +441,7 @@ export default function ApiKeysPage() {
                         <div className="space-y-1">
                             <p className="text-[10px] font-bold text-white/40 uppercase">Endpoint Prefix</p>
                             <code className="text-[10px] bg-black/30 px-2 py-1 rounded block truncate text-[var(--accent)] font-mono">
-                                https://mlbbtopup.in/api/service
+                                https://bluebuff.in/api/service
                             </code>
                         </div>
                     </div>
