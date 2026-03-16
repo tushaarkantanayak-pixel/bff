@@ -12,18 +12,18 @@ export async function POST(req) {
     try {
         const auth = await validateApiKey(req);
         if (!auth.success) {
-            return NextResponse.json({ success: false, message: auth.message }, { status: 401 });
+            return NextResponse.json({ success: false, status: "failed", message: auth.message }, { status: 401 });
         }
 
         const body = await req.json();
         const { gameSlug, itemSlug, playerId, zoneId } = body;
 
         if (!gameSlug || !itemSlug || !playerId) {
-            return NextResponse.json({ success: false, message: "Missing required fields (gameSlug, itemSlug, playerId)" }, { status: 400 });
+            return NextResponse.json({ success: false, status: "failed", message: "Missing required fields (gameSlug, itemSlug, playerId)" }, { status: 400 });
         }
 
-        // ⚡ REGION RESTRICTION CHECK for mobile-legends988 & mlbb-double332
-        if (gameSlug === "mobile-legends988" || gameSlug === "mlbb-double332") {
+        // ⚡ REGION RESTRICTION CHECK for mobile-legends988 and mlbb-double332
+        if (gameSlug === "mobile-legends988" || gameSlug === "mlbb-double332" || gameSlug === "weeklymonthly-bundle931") {
             try {
                 const regionCheckResp = await fetch("https://game-off-ten.vercel.app/api/v1/check-region", {
                     method: "POST",
@@ -41,6 +41,7 @@ export async function POST(req) {
                 if (restrictedRegions.includes(playerRegion)) {
                     return NextResponse.json({
                         success: false,
+                        status: "failed",
                         message: `Orders from ${playerRegion} region are not allowed for this product.`
                     }, { status: 400 });
                 }
@@ -60,14 +61,16 @@ export async function POST(req) {
 
         const priceData = await calculateItemPrice(gameSlug, itemSlug, user.userType);
         if (!priceData) {
-            return NextResponse.json({ success: false, message: "Invalid game or item slug" }, { status: 404 });
+            return NextResponse.json({
+                success: false,
+                status: "failed",
+                message: "Invalid game or item slug"
+            }, { status: 404 });
         }
 
         const { price, itemName } = priceData;
 
         // ⚡ ATOMIC WALLET DEDUCTION
-        // Only deducts if wallet >= price at the exact moment of the DB write.
-        // Prevents negative balances even with 100 concurrent requests.
         const updatedUser = await User.findOneAndUpdate(
             { _id: auth.user.id, wallet: { $gte: price } },
             { $inc: { wallet: -price } },
@@ -77,13 +80,12 @@ export async function POST(req) {
         if (!updatedUser) {
             return NextResponse.json({
                 success: false,
+                status: "failed",
                 message: `Insufficient wallet balance. Required: ₹${price}`
             }, { status: 403 });
         }
 
         // ⚡ ATOMIC DAILY LIMIT INCREMENT
-        // Only increments if usedToday + price <= dailyLimit at the exact moment of write.
-        // Prevents daily limit overshoot even under concurrent load.
         const updatedKey = await ApiKey.findOneAndUpdate(
             {
                 _id: auth.key.id,
@@ -94,37 +96,40 @@ export async function POST(req) {
         );
 
         if (!updatedKey) {
-            // Daily limit was hit concurrently — refund the wallet deduction
+            // Daily limit hit — refund immediately
             await User.findByIdAndUpdate(auth.user.id, { $inc: { wallet: price } });
             return NextResponse.json({
                 success: false,
+                status: "failed",
                 message: `Daily API spend limit reached. Order cancelled and wallet refunded.`
             }, { status: 403 });
         }
 
+        let newOrder;
         const orderId = `API-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-        const newOrder = await Order.create({
-            orderId,
-            userId: updatedUser.userId,
-            gameSlug,
-            itemSlug,
-            itemName,
-            playerId,
-            zoneId: zoneId || "",
-            price,
-            email: updatedUser.email,
-            phone: updatedUser.phone || "",
-            status: "pending",
-            paymentStatus: "success",
-            topupStatus: "pending",
-            paymentMethod: "API_WALLET"
-        });
 
-        /* ========================================
-           AUTO-EXECUTION (FULFILLMENT)
-           Immediately trigger top-up after payment
-        ======================================== */
         try {
+            // 🛡️ Create Order Record
+            newOrder = await Order.create({
+                orderId,
+                userId: updatedUser.userId,
+                gameSlug,
+                itemSlug,
+                itemName,
+                playerId,
+                zoneId: zoneId || "",
+                price,
+                email: updatedUser.email,
+                phone: updatedUser.phone || "",
+                status: "pending",
+                paymentStatus: "success",
+                topupStatus: "pending",
+                paymentMethod: "API_WALLET"
+            });
+
+            /* ========================================
+               AUTO-EXECUTION (FULFILLMENT)
+            ======================================== */
             console.log(`[Service API] Auto-executing Order: ${orderId}`);
 
             // 1. Mark as processing
@@ -140,7 +145,6 @@ export async function POST(req) {
             let isSuccess = false;
 
             if (useSmileOne && isWeeklyPass) {
-                console.log(`[Service API] Using SmileOne for Weekly Pass`);
                 const smileResp = await placeSmileOrder({
                     playerId: String(playerId),
                     zoneId: String(zoneId || ""),
@@ -175,8 +179,14 @@ export async function POST(req) {
                 newOrder.status = "success";
                 newOrder.topupStatus = "success";
             } else {
-                newOrder.status = "failed"; // Note: Wallet deduction remains, admin handles refund if needed
+                newOrder.status = "failed";
                 newOrder.topupStatus = "failed";
+                newOrder.paymentStatus = "failed"; // Money is being returned
+
+                // ⚡ AUTOMATIC REFUND: Fulfillment failed
+                await User.findByIdAndUpdate(auth.user.id, { $inc: { wallet: price } });
+                await ApiKey.findByIdAndUpdate(auth.key.id, { $inc: { usedToday: -price } });
+                console.log(`[Service API] Order ${orderId} failed. Automatically refunded ₹${price}.`);
             }
 
             newOrder.externalResponse = [gameData];
@@ -184,7 +194,8 @@ export async function POST(req) {
 
             return NextResponse.json({
                 success: isSuccess,
-                message: isSuccess ? "Order fulfilled successfully" : "Payment deducted, but fulfillment failed",
+                status: isSuccess ? "success" : "failed",
+                message: isSuccess ? "Order fulfilled successfully" : "Order failed. Wallet balance has been preserved.",
                 order: {
                     orderId: newOrder.orderId,
                     itemName,
@@ -195,25 +206,35 @@ export async function POST(req) {
                 }
             });
 
-        } catch (fulfillError) {
-            console.error("Auto-Fulfillment Error:", fulfillError);
-            // Even if fulfillment fails, the order record exists and wallet is deducted
-            // Admin will see it as "pending/processing" or we mark as failed for manual review
+        } catch (error) {
+            console.error("Internal Order Processing Error:", error);
+
+            // ⚡ EMERGENCY AUTOMATIC REFUND: Technical crash during processing
+            await User.findByIdAndUpdate(auth.user.id, { $inc: { wallet: price } });
+            await ApiKey.findByIdAndUpdate(auth.key.id, { $inc: { usedToday: -price } });
+
+            if (newOrder) {
+                newOrder.status = "failed";
+                newOrder.topupStatus = "failed";
+                newOrder.paymentStatus = "failed";
+                newOrder.externalResponse = [{ error: error.message || "Unknown error during fulfillment" }];
+                await newOrder.save();
+            }
+
             return NextResponse.json({
-                success: true,
-                message: "Order placed, but auto-execution encountered an error. Admin will process manually.",
-                order: {
-                    orderId: newOrder.orderId,
-                    itemName,
-                    price,
-                    status: "pending",
-                    topupStatus: "pending"
-                }
-            });
+                success: false,
+                status: "failed",
+                message: "A technical error occurred. Your wallet balance has been automatically restored.",
+                error: error.message
+            }, { status: 500 });
         }
 
-    } catch (error) {
-        console.error("Order API Error:", error);
-        return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
+    } catch (outerError) {
+        console.error("Critical API Error:", outerError);
+        return NextResponse.json({
+            success: false,
+            status: "failed",
+            message: "Internal Server Error"
+        }, { status: 500 });
     }
 }

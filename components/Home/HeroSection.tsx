@@ -38,7 +38,7 @@ export default function HeroSection() {
         <HomeServices />
         <TrustHighlights />
       </div>
-      <ScrollingNoticeBand />
+      {/* <ScrollingNoticeBand /> */}
 
 
 
