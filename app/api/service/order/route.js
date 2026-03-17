@@ -85,25 +85,9 @@ export async function POST(req) {
             }, { status: 403 });
         }
 
-        // ⚡ ATOMIC DAILY LIMIT INCREMENT
-        const updatedKey = await ApiKey.findOneAndUpdate(
-            {
-                _id: auth.key.id,
-                $expr: { $lte: [{ $add: ["$usedToday", price] }, "$dailyLimit"] }
-            },
-            { $inc: { usedToday: price } },
-            { new: true }
-        );
+        // ⚡ RECORD SPEND (Validation Removed)
+        await ApiKey.findByIdAndUpdate(auth.key.id, { $inc: { usedToday: price } });
 
-        if (!updatedKey) {
-            // Daily limit hit — refund immediately
-            await User.findByIdAndUpdate(auth.user.id, { $inc: { wallet: price } });
-            return NextResponse.json({
-                success: false,
-                status: "failed",
-                message: `Daily API spend limit reached. Order cancelled and wallet refunded.`
-            }, { status: 403 });
-        }
 
         let newOrder;
         const orderId = `API-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
