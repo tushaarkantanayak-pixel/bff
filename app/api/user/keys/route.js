@@ -27,9 +27,22 @@ export async function GET(req) {
             return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
         }
 
+        const todayAtZero = new Date();
+        todayAtZero.setHours(0, 0, 0, 0);
+
         const keys = await ApiKey.find({ userId: user._id }).sort({ createdAt: -1 });
 
-        return NextResponse.json({ success: true, keys });
+        // Dynamic reset for display
+        const displayKeys = keys.map(k => {
+            const kObj = k.toObject();
+            const lastReset = kObj.lastResetDate ? new Date(kObj.lastResetDate).getTime() : 0;
+            if (todayAtZero.getTime() > lastReset) {
+                kObj.usedToday = 0;
+            }
+            return kObj;
+        });
+
+        return NextResponse.json({ success: true, keys: displayKeys });
     } catch (error) {
         console.error("GET Keys Error:", error);
         return NextResponse.json({ success: false, message: "Server Error" }, { status: 500 });

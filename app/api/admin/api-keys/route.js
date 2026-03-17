@@ -22,6 +22,9 @@ export async function GET(req) {
         /* ================= QUERY ================= */
         const last24h = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
+        const todayAtZero = new Date();
+        todayAtZero.setHours(0, 0, 0, 0);
+
         // Fetch all API keys with user info and recent order status
         const keys = await ApiKey.aggregate([
             {
@@ -73,7 +76,19 @@ export async function GET(req) {
                     status: 1,
                     lastUsed: 1,
                     dailyLimit: { $ifNull: ["$dailyLimit", 10000] },
-                    usedToday: { $ifNull: ["$usedToday", 0] },
+                    // Dynamic reset for display
+                    usedToday: {
+                        $cond: {
+                            if: {
+                                $or: [
+                                    { $lt: ["$lastResetDate", todayAtZero] },
+                                    { $not: ["$lastResetDate"] }
+                                ]
+                            },
+                            then: 0,
+                            else: { $ifNull: ["$usedToday", 0] }
+                        }
+                    },
                     "userDetails.name": 1,
                     "userDetails.userId": 1,
                     "userDetails.email": 1,
