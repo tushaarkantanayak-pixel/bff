@@ -103,6 +103,7 @@ export default function GameBannerCarousel() {
                 fill
                 priority
                 className="object-cover transition-transform duration-[8000ms] ease-out group-hover:scale-105"
+                sizes="(max-width: 1280px) 100vw, 1280px"
               />
 
               {/* Tactical Overlays */}

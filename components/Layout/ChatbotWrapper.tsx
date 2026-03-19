@@ -1,7 +1,11 @@
 "use client";
-
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import ChatBot from "@/components/SocialFloat/Chatbot";
+
+// Lazy load ChatBot to reduce initial bundle size
+const ChatBot = dynamic(() => import("@/components/SocialFloat/Chatbot"), {
+    ssr: false,
+});
 
 export default function ChatbotWrapper() {
     const pathname = usePathname();

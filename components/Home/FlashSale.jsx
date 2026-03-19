@@ -135,6 +135,7 @@ export default function FlashSale() {
                                             alt={item.name}
                                             fill
                                             className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                            sizes="(max-width: 640px) 130px, (max-width: 768px) 150px, 200px"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 transition-opacity group-hover:opacity-60" />
                                     </div>

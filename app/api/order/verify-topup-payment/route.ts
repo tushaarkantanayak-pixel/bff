@@ -278,7 +278,7 @@ export async function POST(req: Request) {
 
     for (let i = 0; i < multiplier; i++) {
       try {
-        console.log(`[fulfillment] Attempt ${i + 1}/${multiplier} | Order: ${orderId} | ID: ${finalOrder.gameSlug}_${baseItemSlug}`);
+
 
         let gameData: any;
         let isSuccess = false;
@@ -287,7 +287,7 @@ export async function POST(req: Request) {
         const isWeeklyPass = finalOrder.gameSlug === "mobile-legends988" && (baseItemSlug.toLowerCase().includes("weekly") || baseItemSlug.includes("pass"));
 
         if (useSmileOne && isWeeklyPass) {
-          console.log(`[fulfillment] Using SmileOne for Weekly Pass`);
+
           const smileResp = await placeSmileOrder({
             playerId: String(finalOrder.playerId),
             zoneId: String(finalOrder.zoneId),
@@ -318,7 +318,7 @@ export async function POST(req: Request) {
             (gameData?.success === true || gameData?.status === true || gameData?.result?.status === "SUCCESS");
         }
 
-        console.log(`[fulfillment] Response ${i + 1}/${multiplier}:`, JSON.stringify(gameData));
+
 
         // Remove price from response before pushing
         if (gameData?.data?.price) {

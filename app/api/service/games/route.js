@@ -14,7 +14,7 @@ export async function GET(req) {
             headers: {
                 "x-api-key": process.env.API_SECRET_KEY,
             },
-            cache: "no-store",
+            next: { revalidate: 3600 }, // Cache the games list for 1 hour
         });
 
         const data = await response.json();

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "auto";
+export const revalidate = 300; // Enable ISR for the whole site (5 minutes)
 
 import "./globals.css";
 import Header from "@/components/Header/Header";
@@ -131,6 +132,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={poppins.variable}>
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://cdn.onesignal.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+      </head>
 
 
       <body className="bg-black text-white">
@@ -163,7 +170,7 @@ export default async function RootLayout({
           <BottomNav />
 
 
-          <div />
+
         </GoogleOAuthProvider>
 
 
