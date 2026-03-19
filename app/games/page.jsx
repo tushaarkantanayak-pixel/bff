@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiFilter, FiX, FiSearch, FiGrid, FiList, FiTrendingUp, FiZap, FiPackage } from "react-icons/fi";
@@ -10,7 +10,7 @@ import GameList from "@/components/Games/GameList";
 import FilterModal from "@/components/Games/FilterModal";
 import ServiceGridSection from "@/components/Games/ServiceGridSection";
 
-export default function GamesPage() {
+function GamesContent() {
   /* ================= STATE ================= */
   const [category, setCategory] = useState([]);
   const [games, setGames] = useState([]);
@@ -351,5 +351,17 @@ export default function GamesPage() {
         setHideOOS={setHideOOS}
       />
     </main>
+  );
+}
+
+export default function GamesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[var(--background)] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--accent)]"></div>
+      </div>
+    }>
+      <GamesContent />
+    </Suspense>
   );
 }
