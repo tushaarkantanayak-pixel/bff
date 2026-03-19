@@ -47,6 +47,9 @@ export const metadata = {
     description: "Instant gaming top-ups for MLBB, BGMI, and more in India. Secure payments, instant delivery at Bluebuff.",
     images: ["/logoBB.png"],
   },
+  verification: {
+    google: "QWK_nNCNa9UOVWVpaOf5Ux5GkTuUKhRZndHGDNfMoj8",
+  },
 };
 
 export default function Page() {

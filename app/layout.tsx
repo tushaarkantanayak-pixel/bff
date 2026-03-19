@@ -115,6 +115,9 @@ export const metadata: Metadata = {
     apple: "/logoBB.png",
   },
   manifest: "/manifest.json",
+  verification: {
+    google: "QWK_nNCNa9UOVWVpaOf5Ux5GkTuUKhRZndHGDNfMoj8",
+  },
 };
 
 const poppins = Poppins({
