@@ -3,9 +3,9 @@ import HomeSection from "@/components/Home/Home";
 import WhatsAppQRPopup from "@/components/WhatsAppQRPopup";
 
 export const metadata = {
-  title: "Bluebuff - Buy MLBB Diamonds Instantly in India | Best Game Topup Platform",
+  title: "Bluebuff | Cheapest MLBB Diamonds & Game Topup In India - Instant Delivery",
   description:
-    "Bluebuff is India's most trusted gaming top-up platform. Buy Mobile Legends (MLBB) diamonds, BGMI UC, and other game credits instantly with fast delivery, secure payments, and the best prices.",
+    "Bluebuff is India's leading platform for cheap MLBB diamonds, BGMI UC, and game top-ups. Get instant delivery via UID, 100% secure UPI payments, and the best rates for Honor of Kings & Genshin Impact.",
   keywords: [
     "mlbb recharge india cheap",
     "mlbb top up india instant",

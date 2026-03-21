@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Bluebuff | Buy MLBB Diamonds Instantly",
+        default: "Bluebuff | Cheap MLBB Diamonds & Game Topup In India",
         template: "%s | Bluebuff",
     },
     description:
-        "Bluebuff – Buy Mobile Legends diamonds instantly with fast delivery, secure payments, and best prices. India's trusted gaming top-up platform.",
+        "Instant MLBB topup and cheap gaming credits in India. Bluebuff is the most affordable and secure platform for BGMI UC, Honor of Kings, and MLBB diamonds via UID.",
     keywords: [
         "mlbb recharge india cheap",
         "mlbb top up india instant",

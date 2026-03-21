@@ -50,11 +50,11 @@ const websiteSchema = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Bluebuff | Buy MLBB Diamonds Instantly in India",
+    default: "Bluebuff | Cheapest MLBB Diamonds & Game Topup In India",
     template: "%s | Bluebuff",
   },
   description:
-    "Bluebuff is India's most trusted gaming top-up platform. Buy Mobile Legends (MLBB) diamonds, BGMI UCs, and other game credits instantly with fast delivery, secure payments, and best prices.",
+    "Top up MLBB diamonds, BGMI UC, and gaming credits with instant delivery via UID. Bluebuff offers India's most secure and affordable top-up service for Honor of Kings, Genshin Impact, and more.",
   keywords: [
     "mlbb recharge india cheap",
     "mlbb top up india instant",
