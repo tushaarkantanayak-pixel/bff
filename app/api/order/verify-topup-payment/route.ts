@@ -5,6 +5,7 @@ import Order from "@/models/Order";
 import User from "@/models/User";
 import { getAppSettings } from "@/lib/settings";
 import { placeSmileOrder } from "@/lib/smileOne";
+import { placeMewjiOrder } from "@/lib/mewji";
 
 export async function POST(req: Request) {
   try {
@@ -278,16 +279,23 @@ export async function POST(req: Request) {
 
     for (let i = 0; i < multiplier; i++) {
       try {
-
-
         let gameData: any;
         let isSuccess = false;
 
+        // NEW: Handle BGMI via Mewji API
+        const isBGMI = finalOrder.gameSlug === "bgmi-manual";
         // Check if we should use Smile One for Weekly Pass
         const isWeeklyPass = finalOrder.gameSlug === "mobile-legends988" && (baseItemSlug.toLowerCase().includes("weekly") || baseItemSlug.includes("pass"));
 
-        if (useSmileOne && isWeeklyPass) {
-
+        if (isBGMI) {
+          const mewjiResp = await placeMewjiOrder({
+            playerId: String(finalOrder.playerId),
+            itemSlug: baseItemSlug,
+            orderId: multiplier > 1 ? `${orderId}-${i}` : orderId,
+          });
+          gameData = mewjiResp.data;
+          isSuccess = mewjiResp.success;
+        } else if (useSmileOne && isWeeklyPass) {
           const smileResp = await placeSmileOrder({
             playerId: String(finalOrder.playerId),
             zoneId: String(finalOrder.zoneId),
