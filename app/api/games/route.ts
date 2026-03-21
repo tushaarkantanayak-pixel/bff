@@ -227,11 +227,6 @@ export async function GET() {
       gameImageId: {
         image: "/game-assets/bgmi-logo.webp",
       },
-      tagId: {
-        tagName: "Manual",
-        tagBackground: "#f59e0b",
-        tagColor: "#ffffff",
-      },
     });
 
     /* ================= FILTER CATEGORY GAMES ================= */
