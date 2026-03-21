@@ -23,43 +23,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/region`,
       lastModified: now,
-      changeFrequency: "weekly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/services`,
       lastModified: now,
-      changeFrequency: "weekly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}/contact`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}/privacy-policy`,
       lastModified: now,
-      changeFrequency: "yearly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.4,
     },
     {
       url: `${baseUrl}/terms-and-conditions`,
       lastModified: now,
-      changeFrequency: "yearly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.4,
     },
     {
       url: `${baseUrl}/refund-policy`,
       lastModified: now,
-      changeFrequency: "yearly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.4,
     },
     {
@@ -71,38 +71,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/idsonsell`,
       lastModified: now,
-      changeFrequency: "weekly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.7,
     },
     // Static Blog Posts
     {
       url: `${baseUrl}/blog/is-mlbb-top-up-legal-in-india`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/how-to-buy-mlbb-diamonds-safely-in-india`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/mlbb-weekly-pass-price-in-india`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/how-to-gift-mlbb-diamonds`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog/best-mlbb-diamond-packages-value-guide`,
       lastModified: new Date("2026-02-26"),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.7,
     },
 
@@ -123,14 +123,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const ottRoutes = OTTS.map((item) => ({
     url: `${baseUrl}/games/ott/${item.slug}`,
     lastModified: now,
-    changeFrequency: "monthly" as const,
+    changeFrequency: "daily" as const,
     priority: 0.8,
   }));
 
   const membershipRoutes = MEMBERSHIPS.map((item) => ({
     url: `${baseUrl}/games/membership/${item.slug}`,
     lastModified: now,
-    changeFrequency: "monthly" as const,
+    changeFrequency: "daily" as const,
     priority: 0.8,
   }));
 
@@ -154,7 +154,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .map((g: any) => ({
           url: `${baseUrl}/games/${g.gameSlug}`,
           lastModified: now, // Could use g.updatedAt if available
-          changeFrequency: "weekly" as const,
+          changeFrequency: "daily" as const,
           priority: 0.9,
         }));
     }
