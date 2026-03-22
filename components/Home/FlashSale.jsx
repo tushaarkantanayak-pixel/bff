@@ -12,7 +12,7 @@ const flashSaleData = [
         name: "Weekly Pass",
         game: "MLBB",
         image: "/game-assets/weeklypass.jpg",
-        price: "₹141",
+        price: "₹140",
         originalPrice: "₹175",
         slug: "mobile-legends988?type=weekly-pass",
         badge: "Hot"
@@ -52,7 +52,7 @@ const flashSaleData = [
         name: "Weekly Bundle",
         game: "MLBB",
         image: "/game-assets/weekly-monthly-bundle.jpg",
-        price: "₹79",
+        price: "₹78",
         originalPrice: "₹100",
         slug: "weeklymonthly-bundle931",
         badge: "Value"

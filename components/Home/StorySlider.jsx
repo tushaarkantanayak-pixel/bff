@@ -5,14 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const storyData = [
-  {
-    id: 7,
-    title: "Starlight",
-    badge: "Hot",
-    color: "#06b6d4", // Cyan
-    image: "/game-assets/starkight.webp",
-    link: "/games/starlight-card-manual",
-  },
+
   {
     id: 0,
     title: "Weekly Pass",
@@ -51,6 +44,14 @@ const storyData = [
     color: "#a855f7", // Purple
     image: "/game-assets/mlbb-ph-small.jpg",
     link: "/games/mlbb-smallphp980",
+  },
+  {
+    id: 7,
+    title: "Starlight",
+    badge: "Hot",
+    color: "#06b6d4", // Cyan
+    image: "/game-assets/starkight.webp",
+    link: "/games/starlight-card-manual",
   },
   {
     id: 5,
