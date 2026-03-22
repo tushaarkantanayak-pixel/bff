@@ -203,31 +203,25 @@ export default function UsersTab() {
       </div>
 
       {/* ================= STATS GRID ================= */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Active Users Column */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Activity size={12} className="text-[var(--accent)]" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Active Users</h4>
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-1.5 px-1 opacity-70">
+            <Activity size={10} className="text-[var(--accent)]" />
+            <h4 className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]">Active</h4>
           </div>
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            <InsightCard
-              label="24h"
-              value={activeStats.day}
-              compact
-              color="blue"
-              pulse={activeStats.day > 0}
-            />
+            <InsightCard label="24h" value={activeStats.day} compact color="blue" pulse={activeStats.day > 0} />
             <InsightCard label="7d" value={activeStats.week} compact color="blue" />
             <InsightCard label="30d" value={activeStats.month} compact color="blue" />
           </div>
         </div>
 
         {/* New Registrations Column */}
-        <div className="space-y-2 sm:space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Users size={12} className="text-emerald-500" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">New Registered</h4>
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-1.5 px-1 opacity-70">
+            <Users size={10} className="text-emerald-500" />
+            <h4 className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]">New</h4>
           </div>
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
             <InsightCard label="24h" value={newStats.day} compact color="emerald" pulse={newStats.day > 0} />
@@ -828,15 +822,18 @@ function InsightCard({ label, value, icon, color, pulse, compact }) {
   if (compact) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: 1, y: 0 }}
-        className={`px-2 py-2.5 sm:px-4 sm:py-3 rounded-xl border ${colorClasses[color]} flex flex-col items-center justify-center text-center relative overflow-hidden`}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className={`px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl border ${colorClasses[color]} flex flex-col items-start justify-center relative overflow-hidden bg-[var(--card)]`}
       >
         {pulse && (
           <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-current animate-ping" />
         )}
-        <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-tighter opacity-60 mb-0.5">{label}</span>
-        <span className="text-sm sm:text-base font-extrabold tabular-nums whitespace-nowrap">{value}</span>
+        <div className="flex items-center gap-1 opacity-60 mb-0.5">
+          {icon && <span className="scale-75">{icon}</span>}
+          <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-tighter">{label}</span>
+        </div>
+        <span className="text-xs sm:text-sm font-extrabold tabular-nums whitespace-nowrap">{value}</span>
       </motion.div>
     );
   }
@@ -845,15 +842,16 @@ function InsightCard({ label, value, icon, color, pulse, compact }) {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)] flex items-start gap-4 shadow-sm ${colorClasses[color]}`}
+      className={`p-2 sm:p-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] flex flex-col gap-1 relative overflow-hidden ${colorClasses[color]}`}
     >
-      <div className="p-3 rounded-xl bg-[var(--foreground)]/[0.03] border border-[var(--border)]">
+      {pulse && (
+        <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-current animate-ping" />
+      )}
+      <div className="flex items-center gap-1.5 opacity-60">
         {icon}
+        <span className="text-[8px] font-black uppercase tracking-widest">{label}</span>
       </div>
-      <div>
-        <p className="text-[10px] font-bold uppercase tracking-widest opacity-60 mb-1">{label}</p>
-        <p className="text-2xl font-extrabold">{value}</p>
-      </div>
+      <span className="text-base font-black tabular-nums">{value}</span>
     </motion.div>
   );
 }

@@ -133,9 +133,9 @@ export default function TransactionsTab() {
       {/* ================= HEADER ================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Financial Stream</h2>
+          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Transaction Activity</h2>
           <p className="text-xs text-[var(--muted)] font-medium mt-1">
-            Real-time transaction monitoring and audit logs
+            Real-time logs for all transactions.
           </p>
         </div>
 
@@ -156,61 +156,30 @@ export default function TransactionsTab() {
       </div>
 
       {/* ================= STATS ================= */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Transaction Volume Column */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <Hash size={14} className="text-blue-500" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Transaction Volume</h4>
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-1.5 px-1 opacity-70">
+            <Hash size={10} className="text-blue-500" />
+            <h4 className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]">Volume</h4>
           </div>
-          <div className="grid grid-cols-3 gap-3">
-            <InsightCard
-              label="24h"
-              value={stats.counts?.day}
-              color="blue"
-              compact
-              pulse={stats.counts?.day > 0}
-            />
-            <InsightCard
-              label="7d"
-              value={stats.counts?.week}
-              color="blue"
-              compact
-            />
-            <InsightCard
-              label="30d"
-              value={stats.counts?.month}
-              color="blue"
-              compact
-            />
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <InsightCard label="24h" value={stats.counts?.day} color="blue" compact pulse={stats.counts?.day > 0} />
+            <InsightCard label="7d" value={stats.counts?.week} color="blue" compact />
+            <InsightCard label="30d" value={stats.counts?.month} color="blue" compact />
           </div>
         </div>
 
         {/* Revenue Snapshot Column */}
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 px-1">
-            <IndianRupee size={14} className="text-emerald-500" />
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Revenue Snapshot</h4>
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-1.5 px-1 opacity-70">
+            <IndianRupee size={10} className="text-emerald-500" />
+            <h4 className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]">Revenue</h4>
           </div>
-          <div className="grid grid-cols-3 gap-3">
-            <InsightCard
-              label="24h"
-              value={`₹${(stats.volume?.day || 0).toLocaleString()}`}
-              color="emerald"
-              compact
-            />
-            <InsightCard
-              label="7d"
-              value={`₹${(stats.volume?.week || 0).toLocaleString()}`}
-              color="emerald"
-              compact
-            />
-            <InsightCard
-              label="30d"
-              value={`₹${(stats.volume?.month || 0).toLocaleString()}`}
-              color="emerald"
-              compact
-            />
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <InsightCard label="24h" value={`₹${(stats.volume?.day || 0).toLocaleString()}`} color="emerald" compact pulse={stats.volume?.day > 0} />
+            <InsightCard label="7d" value={`₹${(stats.volume?.week || 0).toLocaleString()}`} color="emerald" compact />
+            <InsightCard label="30d" value={`₹${(stats.volume?.month || 0).toLocaleString()}`} color="emerald" compact />
           </div>
         </div>
       </div>
@@ -258,12 +227,12 @@ export default function TransactionsTab() {
               <table className="w-full text-left text-sm">
                 <thead className="bg-[var(--foreground)]/[0.03] border-b border-[var(--border)]">
                   <tr className="text-[10px] uppercase font-bold tracking-widest text-[var(--muted)]">
-                    <th className="px-6 py-4">Timeline</th>
-                    <th className="px-6 py-4">Reference</th>
-                    <th className="px-6 py-4">Identity</th>
+                    <th className="px-6 py-4">Time</th>
+                    <th className="px-6 py-4">Order Info</th>
                     <th className="px-6 py-4">Category</th>
-                    <th className="px-6 py-4">Status</th>
+                    <th className="px-6 py-4">Method</th>
                     <th className="px-6 py-4 text-right">Value</th>
+                    <th className="px-6 py-4 text-center">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--border)]">
@@ -285,29 +254,31 @@ export default function TransactionsTab() {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="font-mono text-[10px] text-[var(--accent)] uppercase">{t.orderId}</span>
+                          <div className="flex flex-col">
+                            <span className="font-mono text-[10px] text-[var(--accent)] font-bold uppercase">{t.orderId}</span>
+                            <span className="text-[10px] text-[var(--muted)] truncate max-w-[120px]">{t.email || "Guest"}</span>
+                          </div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex flex-col max-w-[150px]">
-                            <span className="truncate text-[var(--foreground)] font-medium">{t.email || "Guest User"}</span>
+                            <span className="truncate text-[var(--foreground)] font-bold uppercase text-[10px]">{t.gameSlug}</span>
                             <span className="text-[10px] text-[var(--muted)]/40 truncate">{t.playerId || "No ID"}</span>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="flex items-center gap-2 text-[10px] font-bold uppercase text-[var(--muted)]/60">
-                            <Gamepad2 size={12} className="text-[var(--accent)]" />
-                            {t.gameSlug}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border text-[9px] font-bold uppercase tracking-wider ${meta.class}`}>
-                            {meta.icon}
-                            {meta.label}
+                          <span className="text-[10px] font-bold uppercase text-[var(--muted)]/40 truncate block max-w-[80px]">
+                            {t.paymentMethod || 'N/A'}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-right">
-                          <span className="text-base font-black text-emerald-500 tracking-tighter tabular-nums">
+                          <span className="text-base font-black text-emerald-500 tabular-nums">
                             ₹{t.price}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border text-[9px] font-bold uppercase tracking-wider ${meta.class}`}>
+                            {meta.icon}
+                            {meta.label}
                           </span>
                         </td>
                       </motion.tr>
@@ -518,15 +489,18 @@ function InsightCard({ label, value, icon, color, pulse, compact }) {
   if (compact) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: 1, y: 0 }}
-        className={`px-4 py-3 rounded-xl border ${colors[color]} flex flex-col items-center justify-center text-center relative overflow-hidden`}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className={`px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl border ${colors[color]} flex flex-col items-start justify-center relative overflow-hidden bg-[var(--card)]`}
       >
         {pulse && (
           <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-current animate-ping" />
         )}
-        <span className="text-[9px] font-bold uppercase tracking-tighter opacity-60 mb-0.5">{label}</span>
-        <span className="text-base font-extrabold tabular-nums whitespace-nowrap">{value}</span>
+        <div className="flex items-center gap-1 opacity-60 mb-0.5">
+          {icon && <span className="scale-75">{icon}</span>}
+          <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-tighter">{label}</span>
+        </div>
+        <span className="text-xs sm:text-sm font-extrabold tabular-nums whitespace-nowrap">{value}</span>
       </motion.div>
     );
   }
@@ -535,16 +509,16 @@ function InsightCard({ label, value, icon, color, pulse, compact }) {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`p-4 rounded-2xl border ${colors[color]} flex flex-col gap-2 relative overflow-hidden`}
+      className={`p-2 sm:p-3 rounded-2xl border ${colors[color]} flex flex-col gap-1 relative overflow-hidden bg-[var(--card)]`}
     >
       {pulse && (
         <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-current animate-ping" />
       )}
-      <div className="flex items-center gap-2 opacity-60">
+      <div className="flex items-center gap-1.5 opacity-60">
         {icon}
-        <span className="text-[9px] font-black uppercase tracking-widest">{label}</span>
+        <span className="text-[8px] font-black uppercase tracking-widest">{label}</span>
       </div>
-      <span className="text-xl font-black tabular-nums">{value}</span>
+      <span className="text-base font-black tabular-nums">{value}</span>
     </motion.div>
   );
 }

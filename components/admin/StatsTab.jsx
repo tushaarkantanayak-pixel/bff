@@ -237,9 +237,9 @@ export default function StatsTab() {
             {/* HEADER */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)]">Wallet Manager</h2>
+                    <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[var(--foreground)]">Balance Manager</h2>
                     <p className="hidden sm:block text-sm text-[var(--muted)] mt-1">
-                        Overview, Manual Adjustments & {activeTab === "history" ? "Transaction History" : "User Wallets"}.
+                        Check balances, edit money, and see history here.
                     </p>
                 </div>
 
@@ -281,33 +281,35 @@ export default function StatsTab() {
             {loading && !data.totalBalance && (!data.wallets || !data.wallets.length) ? (
                 <div className="py-32 flex flex-col items-center justify-center space-y-4">
                     <Loader2 className="animate-spin text-[var(--accent)]" size={32} />
-                    <p className="text-sm text-[var(--muted)] font-medium">Fetching wallet data...</p>
+                    <p className="text-sm text-[var(--muted)] font-medium">Getting wallet info...</p>
                 </div>
             ) : (
                 <>
                     {/* TOP LEVEL OVERVIEW */}
-                    <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
+                    <div className="flex flex-wrap gap-2 sm:gap-4">
                         <InsightCard
-                            label="Wallet Liability"
+                            label="Funds"
                             value={`₹${(data.totalBalance || 0).toLocaleString()}`}
-                            icon={<FiCreditCard size={14} />}
+                            icon={<FiCreditCard size={12} />}
                             color="blue"
+                            compact
                         />
                         <InsightCard
-                            label="Active Wallets"
+                            label="Wallets"
                             value={data.activeWallets || 0}
-                            icon={<FiUser size={14} />}
+                            icon={<FiUser size={12} />}
                             color="amber"
+                            compact
                         />
                     </div>
 
                     {/* SNAPSHOT GRID */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         {/* Deposits Volume Column */}
-                        <div className="space-y-2 sm:space-y-3">
-                            <div className="flex items-center gap-2 px-1">
-                                <FiArrowUp size={12} className="text-emerald-500" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Deposit Stream</h4>
+                        <div className="space-y-1.5">
+                            <div className="flex items-center gap-1.5 px-1 opacity-70">
+                                <FiArrowUp size={10} className="text-emerald-500" />
+                                <h4 className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]">Added</h4>
                             </div>
                             <div className="grid grid-cols-3 gap-2 sm:gap-3">
                                 <InsightCard
@@ -333,10 +335,10 @@ export default function StatsTab() {
                         </div>
 
                         {/* Usage Snapshot Column */}
-                        <div className="space-y-2 sm:space-y-3">
-                            <div className="flex items-center gap-2 px-1">
-                                <FiArrowDown size={12} className="text-purple-500" />
-                                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Usage Snapshot</h4>
+                        <div className="space-y-1.5">
+                            <div className="flex items-center gap-1.5 px-1 opacity-70">
+                                <FiArrowDown size={10} className="text-purple-500" />
+                                <h4 className="text-[9px] font-black uppercase tracking-widest text-[var(--muted)]">Spent</h4>
                             </div>
                             <div className="grid grid-cols-3 gap-2 sm:gap-3">
                                 <InsightCard
@@ -366,12 +368,12 @@ export default function StatsTab() {
                     <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 sm:p-6 relative overflow-hidden">
                         <div className="flex items-center gap-2 mb-4 sm:mb-6">
                             <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                            <h3 className="text-base sm:text-lg font-bold text-[var(--foreground)]">Manual Wallet Adjustment</h3>
+                            <h3 className="text-base sm:text-lg font-bold text-[var(--foreground)]">Edit User Balance</h3>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-stretch md:items-end gap-3 sm:gap-4">
                             <div className="flex-1 space-y-1.5">
-                                <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">User Email</label>
+                                <label className="text-[10px] sm:text-xs font-semibold text-[var(--muted)] ml-1 uppercase tracking-wider">Customer Email</label>
                                 <div className="relative">
                                     <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--muted)]" />
                                     <input
@@ -406,7 +408,7 @@ export default function StatsTab() {
                                     className="flex-1 md:flex-none h-10 sm:h-11 px-4 sm:px-5 rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-[11px] flex items-center justify-center gap-2 hover:bg-emerald-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
                                 >
                                     {updating ? <Loader2 className="animate-spin" size={14} /> : <FiPlus size={14} />}
-                                    <span className="hidden xs:inline">Add Funds</span>
+                                    <span className="hidden xs:inline">Add Money</span>
                                     <span className="xs:hidden">Add</span>
                                 </button>
                                 <button
@@ -415,7 +417,7 @@ export default function StatsTab() {
                                     className="flex-1 md:flex-none h-10 sm:h-11 px-4 sm:px-5 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[11px] flex items-center justify-center gap-2 hover:bg-red-500/20 active:scale-95 transition-all outline-none disabled:opacity-50"
                                 >
                                     {updating ? <Loader2 className="animate-spin" size={14} /> : <FiMinus size={14} />}
-                                    <span className="hidden xs:inline">Remove Funds</span>
+                                    <span className="hidden xs:inline">Remove Money</span>
                                     <span className="xs:hidden">Deduct</span>
                                 </button>
                             </div>
@@ -429,7 +431,7 @@ export default function StatsTab() {
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                     <h3 className="text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
                                         <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                                        Transaction History
+                                        Past Activity
                                     </h3>
                                 </div>
 
@@ -440,7 +442,7 @@ export default function StatsTab() {
                                         <input
                                             value={historySearch}
                                             onChange={(e) => { setHistorySearch(e.target.value); setHistoryPage(1); }}
-                                            placeholder="Search transactions..."
+                                            placeholder="Search activity..."
                                             className="w-full h-10 pl-9 pr-4 rounded-xl bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--foreground)] outline-none focus:border-[var(--accent)] transition-all placeholder:text-[var(--muted)]/50"
                                         />
                                     </div>
@@ -451,9 +453,9 @@ export default function StatsTab() {
                                                 onChange={(e) => { setHistoryType(e.target.value); setHistoryPage(1); }}
                                                 className="w-full h-10 px-3 pr-8 rounded-xl bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--foreground)] outline-none focus:border-[var(--accent)] appearance-none cursor-pointer"
                                             >
-                                                <option value="">All Types</option>
-                                                <option value="credit">Credit</option>
-                                                <option value="debit">Debit</option>
+                                                <option value="">All Actions</option>
+                                                <option value="credit">Added</option>
+                                                <option value="debit">Spent</option>
                                             </select>
                                             <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--muted)]">
                                                 <FiFilter size={14} />
@@ -467,7 +469,7 @@ export default function StatsTab() {
                                                 onChange={(e) => { setHistoryStatus(e.target.value); setHistoryPage(1); }}
                                                 className="w-full h-10 px-3 pr-8 rounded-xl bg-[var(--card)] border border-[var(--border)] text-sm text-[var(--foreground)] outline-none focus:border-[var(--accent)] appearance-none cursor-pointer"
                                             >
-                                                <option value="">All Status</option>
+                                                <option value="">All Results</option>
                                                 <option value="success">Success</option>
                                                 <option value="failed">Failed</option>
                                                 <option value="pending">Pending</option>
@@ -488,7 +490,7 @@ export default function StatsTab() {
                                         Loading history...
                                     </div>
                                 ) : history.length === 0 ? (
-                                    <div className="py-12 text-center text-[var(--muted)]">No transactions found.</div>
+                                    <div className="py-12 text-center text-[var(--muted)]">No activity found.</div>
                                 ) : (
                                     history.map((txn) => (
                                         <div key={txn._id} className="p-4 rounded-xl bg-[var(--card)] border border-[var(--border)] space-y-3 relative overflow-hidden">
@@ -502,7 +504,7 @@ export default function StatsTab() {
                                                         {txn.type === 'credit' ? <FiArrowUp size={10} /> : <FiArrowDown size={10} />}
                                                         {txn.type}
                                                     </span>
-                                                    <p className="text-[10px] text-[var(--muted)] font-mono mt-2 tracking-wide uppercase opacity-70">TXN ID</p>
+                                                    <p className="text-[10px] text-[var(--muted)] font-mono mt-2 tracking-wide uppercase opacity-70">ID</p>
                                                     <p className="text-xs font-mono text-[var(--foreground)]">{txn.transactionId}</p>
                                                 </div>
                                                 <div className="text-right">
@@ -514,7 +516,7 @@ export default function StatsTab() {
                                                             {txn.status === 'pending' && (
                                                                 <button
                                                                     onClick={async () => {
-                                                                        if (!confirm("Verify with Gateway?")) return;
+                                                                        if (!confirm("Check Online?")) return;
                                                                         try {
                                                                             const token = localStorage.getItem("token");
                                                                             const res = await fetch("/api/admin/wallet/verify", {
@@ -530,7 +532,7 @@ export default function StatsTab() {
                                                                         }
                                                                     }}
                                                                     className="p-1.5 rounded-lg bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 transition-colors"
-                                                                    title="Check & Auto Approve"
+                                                                    title="Check Online"
                                                                 >
                                                                     <FiRefreshCw size={14} />
                                                                 </button>
@@ -539,7 +541,7 @@ export default function StatsTab() {
                                                                 <button
                                                                     onClick={() => handleStatusUpdate(txn._id, 'success')}
                                                                     className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20 transition-colors"
-                                                                    title="Manually Mark Success"
+                                                                    title="Mark as Finished"
                                                                 >
                                                                     <FiCheckCircle size={14} />
                                                                 </button>
@@ -548,7 +550,7 @@ export default function StatsTab() {
                                                                 <button
                                                                     onClick={() => handleStatusUpdate(txn._id, 'failed')}
                                                                     className="p-1.5 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
-                                                                    title="Mark Failed & Deduct"
+                                                                    title="Mark as Failed"
                                                                 >
                                                                     <FiXCircle size={14} />
                                                                 </button>
@@ -584,7 +586,7 @@ export default function StatsTab() {
                                     <table className="w-full text-left text-sm">
                                         <thead className="bg-[var(--foreground)]/[0.03] border-b border-[var(--border)] text-[var(--muted)]">
                                             <tr className="text-xs font-semibold uppercase tracking-wider">
-                                                <th className="px-6 py-4">Transaction ID</th>
+                                                <th className="px-6 py-4">ID</th>
                                                 <th className="px-6 py-4">User</th>
                                                 <th className="px-6 py-4">Type</th>
                                                 <th className="px-6 py-4 text-right">Amount</th>
@@ -604,7 +606,7 @@ export default function StatsTab() {
                                             ) : history.length === 0 ? (
                                                 <tr>
                                                     <td colSpan="7" className="px-6 py-12 text-center text-[var(--muted)]">
-                                                        No transactions found.
+                                                        No activity found.
                                                     </td>
                                                 </tr>
                                             ) : (
@@ -622,7 +624,7 @@ export default function StatsTab() {
                                                                 ? 'bg-emerald-500/5 text-emerald-500 border-emerald-500/20'
                                                                 : 'bg-red-500/5 text-red-500 border-red-500/20'
                                                                 }`}>
-                                                                {txn.type}
+                                                                {txn.type === 'credit' ? 'Added' : 'Spent'}
                                                             </span>
                                                         </td>
                                                         <td className="px-6 py-4 text-right">
@@ -646,7 +648,7 @@ export default function StatsTab() {
                                                                 {txn.status === 'pending' && (
                                                                     <button
                                                                         onClick={async () => {
-                                                                            if (!confirm("Verify this Pending Transaction with Gateway?")) return;
+                                                                            if (!confirm("Check this Pending Action Online?")) return;
                                                                             try {
                                                                                 const token = localStorage.getItem("token");
                                                                                 const res = await fetch("/api/admin/wallet/verify", {
@@ -663,7 +665,7 @@ export default function StatsTab() {
                                                                             }
                                                                         }}
                                                                         className="p-1.5 rounded-lg hover:bg-blue-500/10 text-blue-500 transition-colors"
-                                                                        title="Check Gateway & Auto Approve"
+                                                                        title="Check Online"
                                                                     >
                                                                         <FiRefreshCw size={14} />
                                                                     </button>
@@ -672,7 +674,7 @@ export default function StatsTab() {
                                                                     <button
                                                                         onClick={() => handleStatusUpdate(txn._id, 'success')}
                                                                         className="p-1.5 rounded-lg hover:bg-emerald-500/10 text-emerald-500 transition-colors"
-                                                                        title="Manually Mark as Success"
+                                                                        title="Mark as Success"
                                                                     >
                                                                         <FiCheckCircle size={14} />
                                                                     </button>
@@ -681,7 +683,7 @@ export default function StatsTab() {
                                                                     <button
                                                                         onClick={() => handleStatusUpdate(txn._id, 'failed')}
                                                                         className="p-1.5 rounded-lg hover:bg-red-500/10 text-red-500 transition-colors"
-                                                                        title="Mark as Failed & Deduct Funds"
+                                                                        title="Mark as Failed"
                                                                     >
                                                                         <FiXCircle size={14} />
                                                                     </button>
@@ -894,26 +896,29 @@ function InsightCard({ label, value, icon, color, pulse, compact }) {
 
     if (compact) {
         return (
-            <div className={`px-2 py-2.5 sm:px-4 sm:py-3 rounded-xl border ${colors[color]} flex flex-col items-center justify-center text-center relative overflow-hidden bg-[var(--card)]`}>
+            <div className={`px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl border ${colors[color]} flex flex-col items-start justify-center relative overflow-hidden bg-[var(--card)]`}>
                 {pulse && (
                     <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-current animate-ping" />
                 )}
-                <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-tighter opacity-60 mb-0.5">{label}</span>
-                <span className="text-sm sm:text-base font-extrabold tabular-nums whitespace-nowrap">{value}</span>
+                <div className="flex items-center gap-1 opacity-60 mb-0.5">
+                    {icon && <span className="scale-75">{icon}</span>}
+                    <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-tighter">{label}</span>
+                </div>
+                <span className="text-xs sm:text-sm font-extrabold tabular-nums whitespace-nowrap">{value}</span>
             </div>
         );
     }
 
     return (
-        <div className={`p-3 sm:p-4 rounded-2xl border ${colors[color]} flex flex-col gap-1.5 sm:gap-2 relative overflow-hidden bg-[var(--card)]`}>
+        <div className={`p-2 sm:p-3 rounded-2xl border ${colors[color]} flex flex-col gap-1 relative overflow-hidden bg-[var(--card)]`}>
             {pulse && (
                 <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-current animate-ping" />
             )}
-            <div className="flex items-center gap-1.5 sm:gap-2 opacity-60">
+            <div className="flex items-center gap-1.5 opacity-60">
                 {icon}
-                <span className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest">{label}</span>
+                <span className="text-[8px] font-black uppercase tracking-widest">{label}</span>
             </div>
-            <span className="text-lg sm:text-xl font-black tabular-nums">{value}</span>
+            <span className="text-base font-black tabular-nums">{value}</span>
         </div>
     );
 }

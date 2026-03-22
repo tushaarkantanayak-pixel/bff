@@ -164,13 +164,13 @@ export default function PricingTab({
       {/* ================= HEADER ================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2 md:px-0">
         <div className="space-y-1">
-          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Pricing Management</h2>
-          <p className="text-sm text-[var(--muted)]">Configure markups and asset pricing limits.</p>
+          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Manage Prices</h2>
+          <p className="text-sm text-[var(--muted)]">Set price increases and fixed prices here.</p>
         </div>
 
         <div className="flex items-center gap-2">
           <div className="flex bg-[var(--foreground)]/[0.03] p-1 rounded-xl border border-[var(--border)] w-full sm:w-auto">
-            {[{ id: "percent", label: "Markup", icon: <Percent size={14} /> }, { id: "fixed", label: "Fixed", icon: <Coins size={14} /> }].map((m) => (
+            {[{ id: "percent", label: "Increase %", icon: <Percent size={14} /> }, { id: "fixed", label: "Fixed Price", icon: <Coins size={14} /> }].map((m) => (
               <button
                 key={m.id}
                 onClick={() => setPricingMode(m.id)}
@@ -194,7 +194,7 @@ export default function PricingTab({
           <div className="p-4 sm:p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)] space-y-4">
             <div className="flex items-center gap-3">
               <Settings2 size={16} className="text-[var(--accent)]" />
-              <h3 className="text-xs font-bold text-[var(--muted)]">Target Roles</h3>
+              <h3 className="text-xs font-bold text-[var(--muted)]">Who is this for?</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {["user", "member", "admin"].map((type) => (
@@ -226,21 +226,21 @@ export default function PricingTab({
                     <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]">
                       <Percent size={18} />
                     </div>
-                    <h3 className="text-base font-bold text-[var(--foreground)]">Markup Ranges</h3>
+                    <h3 className="text-base font-bold text-[var(--foreground)]">Price Ranges</h3>
                   </div>
                   <button
                     onClick={addSlab}
                     className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[var(--accent)] text-white text-xs font-bold hover:brightness-110 active:scale-95 transition-all outline-none"
                   >
-                    + Add New Range
+                    + Add Range
                   </button>
                 </div>
 
                 <div className="space-y-2">
                   <div className="hidden sm:grid grid-cols-12 gap-3 px-2 text-[10px] font-bold text-[var(--muted)]">
-                    <div className="col-span-4">Min Price (₹)</div>
-                    <div className="col-span-4">Max Price (₹)</div>
-                    <div className="col-span-3">Markup (%)</div>
+                    <div className="col-span-4">At least ₹</div>
+                    <div className="col-span-4">At most ₹</div>
+                    <div className="col-span-3">Add %</div>
                     <div className="col-span-1"></div>
                   </div>
 
@@ -297,7 +297,7 @@ export default function PricingTab({
 
                   {!slabs.length && (
                     <div className="py-16 text-center border border-dashed border-[var(--border)] rounded-2xl">
-                      <p className="text-xs font-medium text-[var(--muted)]">No markup ranges defined.</p>
+                      <p className="text-xs font-medium text-[var(--muted)]">No price ranges set yet.</p>
                     </div>
                   )}
                 </div>
@@ -316,7 +316,7 @@ export default function PricingTab({
                     <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
                       <Coins size={18} />
                     </div>
-                    <h3 className="text-base font-bold text-[var(--foreground)]">Asset Pricing Overrides</h3>
+                    <h3 className="text-base font-bold text-[var(--foreground)]">Set Item Prices</h3>
                   </div>
 
                   <div className="relative">
@@ -326,7 +326,7 @@ export default function PricingTab({
                       onChange={(e) => setFixedGameFilter(e.target.value)}
                       className="w-full h-11 pl-11 pr-10 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--foreground)] font-semibold text-sm outline-none appearance-none cursor-pointer focus:border-[var(--accent)]/50 transition-all [color-scheme:dark]"
                     >
-                      <option value="">Select Target Game</option>
+                      <option value="">Pick a Game</option>
                       {games.map((g) => (
                         <option key={g.gameSlug} value={g.gameSlug}>
                           {g.gameName}
@@ -340,7 +340,7 @@ export default function PricingTab({
                     <div className="flex flex-col gap-3 p-4 rounded-xl bg-[var(--accent)]/5 border border-[var(--accent)]/10">
                       <div className="flex items-center gap-2.5">
                         <Info size={14} className="text-[var(--accent)]" />
-                        <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">Bulk adjustment</span>
+                        <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">Change All</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="relative flex-1">
@@ -362,7 +362,7 @@ export default function PricingTab({
                         </button>
                       </div>
                       <p className="text-[10px] text-[var(--muted)]/50 px-1 italic">
-                        Applies percentage change to all visible items.
+                        This changes all shown item prices by %.
                       </p>
                     </div>
                   )}
@@ -374,7 +374,7 @@ export default function PricingTab({
                     {loadingFixedPrices ? (
                       <div className="col-span-full py-16 flex flex-col items-center justify-center opacity-40">
                         <Loader2 size={28} className="animate-spin text-[var(--accent)] mb-3" />
-                        <p className="text-[10px] font-bold uppercase tracking-widest">Fetching Prices...</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest">Getting Prices...</p>
                       </div>
                     ) : (
                       visibleOverrides.map((o, idx) => (
@@ -424,16 +424,16 @@ export default function PricingTab({
           <div className="lg:sticky lg:top-6 p-5 sm:p-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] space-y-5">
             <div className="flex items-center gap-3 border-b border-[var(--border)] pb-4">
               <Shield size={18} className="text-[var(--accent)]" />
-              <h3 className="text-base font-bold text-[var(--foreground)]">Pricing Summary</h3>
+              <h3 className="text-base font-bold text-[var(--foreground)]">Final Check</h3>
             </div>
 
             <div className="space-y-4">
               <div className="flex justify-between items-center text-xs font-medium">
-                <span className="text-[var(--muted)]">Pricing Mode</span>
-                <span className="text-[var(--foreground)] font-bold capitalize">{pricingMode === 'percent' ? 'Markup %' : 'Fixed Price'}</span>
+                <span className="text-[var(--muted)]">Style</span>
+                <span className="text-[var(--foreground)] font-bold capitalize">{pricingMode === 'percent' ? 'Percentage' : 'Fixed Price'}</span>
               </div>
               <div className="flex justify-between items-center text-xs font-medium">
-                <span className="text-[var(--muted)]">Applies To</span>
+                <span className="text-[var(--muted)]">For Who</span>
                 <span className="text-white bg-[var(--accent)] px-2.5 py-0.5 rounded-full text-[10px] font-bold capitalize tracking-wide">{pricingType}s</span>
               </div>
               <div className="flex justify-between items-center text-xs font-medium">
@@ -462,7 +462,7 @@ export default function PricingTab({
               ) : (
                 <>
                   <Save size={16} />
-                  Save Pricing
+                  Save All
                 </>
               )}
             </button>

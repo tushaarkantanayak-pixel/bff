@@ -148,9 +148,9 @@ export default function SupportQueriesTab() {
       {/* ================= HEADER ================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Support Queries</h2>
+          <h2 className="text-xl font-bold tracking-tight text-[var(--foreground)]">Help Messages</h2>
           <p className="text-xs text-[var(--muted)] font-medium mt-1">
-            Manage your customer support messages
+            Reply to customers and solve their problems here.
           </p>
         </div>
 
@@ -170,25 +170,28 @@ export default function SupportQueriesTab() {
       </div>
 
       {/* ================= STATS GRID ================= */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="flex flex-wrap gap-2 sm:gap-4">
         <InsightCard
-          label="Total Queries"
+          label="Total"
           value={stats.total}
-          icon={<Inbox size={14} />}
+          icon={<Inbox size={12} />}
           color="blue"
+          compact
         />
         <InsightCard
-          label="Active Pending"
+          label="Help"
           value={stats.open}
-          icon={<AlertCircle size={14} />}
+          icon={<AlertCircle size={12} />}
           color="amber"
           pulse={stats.open > 0}
+          compact
         />
         <InsightCard
-          label="Received Today"
+          label="Today"
           value={stats.today}
-          icon={<MessageSquare size={14} />}
+          icon={<MessageSquare size={12} />}
           color="purple"
+          compact
         />
       </div>
 
@@ -202,7 +205,7 @@ export default function SupportQueriesTab() {
               setPage(1);
               setSearch(e.target.value);
             }}
-            placeholder="Search queries..."
+            placeholder="Search messages..."
             className="w-full h-11 pl-11 pr-4 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.02] text-[var(--foreground)] text-sm focus:border-[var(--accent)]/50 outline-none placeholder:text-[var(--muted)]/40"
           />
         </div>
@@ -279,7 +282,7 @@ export default function SupportQueriesTab() {
               {!queries.length && (
                 <div className="py-16 text-center border border-dashed border-[var(--border)] rounded-2xl">
                   <Inbox className="mx-auto text-[var(--muted)]/20 mb-2" size={32} />
-                  <p className="text-[10px] font-bold text-[var(--muted)]/40 uppercase tracking-widest">No queries found</p>
+                  <p className="text-[10px] font-bold text-[var(--muted)]/40 uppercase tracking-widest">No messages found</p>
                 </div>
               )}
 
@@ -331,7 +334,7 @@ export default function SupportQueriesTab() {
               className="relative w-full max-w-lg bg-[var(--background)] border border-[var(--border)] rounded-[2rem] shadow-2xl overflow-hidden"
             >
               <div className="px-6 py-4 border-b border-[var(--border)] flex items-center justify-between">
-                <h3 className="text-base font-bold text-[var(--foreground)]">Query Details</h3>
+                <h3 className="text-base font-bold text-[var(--foreground)]">Message Details</h3>
                 <button
                   onClick={() => setActiveQuery(null)}
                   className="w-8 h-8 rounded-full bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--muted)]/40 hover:text-[var(--foreground)] hover:bg-red-500/20 transition-all"
@@ -462,7 +465,7 @@ function DetailBlock({ label, value, emphasize, icon }) {
   );
 }
 
-function InsightCard({ label, value, icon, color, pulse }) {
+function InsightCard({ label, value, icon, color, pulse, compact }) {
   const colors = {
     blue: "text-blue-500 bg-blue-500/5 border-blue-500/10",
     amber: "text-amber-500 bg-amber-500/5 border-amber-500/10",
@@ -470,20 +473,39 @@ function InsightCard({ label, value, icon, color, pulse }) {
     emerald: "text-emerald-500 bg-emerald-500/5 border-emerald-500/10",
   };
 
+  if (compact) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className={`px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl border ${colors[color]} flex flex-col items-start justify-center relative overflow-hidden bg-[var(--card)]`}
+      >
+        {pulse && (
+          <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-current animate-ping" />
+        )}
+        <div className="flex items-center gap-1 opacity-60 mb-0.5">
+          {icon && <span className="scale-75">{icon}</span>}
+          <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-tighter">{label}</span>
+        </div>
+        <span className="text-xs sm:text-sm font-extrabold tabular-nums whitespace-nowrap">{value}</span>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`p-4 rounded-2xl border ${colors[color]} flex flex-col gap-2 relative overflow-hidden bg-[var(--card)]`}
+      className={`p-2 sm:p-3 rounded-2xl border ${colors[color]} flex flex-col gap-1 relative overflow-hidden bg-[var(--card)]`}
     >
       {pulse && (
         <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-current animate-ping" />
       )}
-      <div className="flex items-center gap-2 opacity-60">
+      <div className="flex items-center gap-1.5 opacity-60">
         {icon}
-        <span className="text-[9px] font-black uppercase tracking-widest">{label}</span>
+        <span className="text-[8px] font-black uppercase tracking-widest">{label}</span>
       </div>
-      <span className="text-xl font-black tabular-nums">{value}</span>
+      <span className="text-base font-black tabular-nums">{value}</span>
     </motion.div>
   );
 }

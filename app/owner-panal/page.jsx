@@ -195,7 +195,7 @@ export default function AdminPanalPage() {
           <div className="mb-4">
             <div className="flex items-center gap-2">
               <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--foreground)]">
-                Admin Panel
+                Owner Control
               </h1>
 
               {/* Accent status dot */}
@@ -203,7 +203,7 @@ export default function AdminPanalPage() {
             </div>
 
             <p className="mt-0.5 text-xs md:text-sm text-[var(--muted)] max-w-lg leading-snug">
-              Manage users, orders, transactions, queries & pricing
+              Manage your customers, sales, and settings here.
             </p>
           </div>
 
@@ -222,7 +222,7 @@ export default function AdminPanalPage() {
             <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[var(--accent)] to-purple-500 rounded-t-xl" />
 
             <p className="text-xs uppercase tracking-wide text-[var(--muted)]">
-              Account Balance
+              My Funds
             </p>
 
             <div className="mt-1 flex items-end gap-2">
@@ -231,7 +231,7 @@ export default function AdminPanalPage() {
               </p>
 
               <span className="text-sm font-medium text-green-500">
-                Available
+                Ready to spend
               </span>
             </div>
           </div>
