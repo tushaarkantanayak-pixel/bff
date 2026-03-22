@@ -192,52 +192,31 @@ export default function AdminPanalPage() {
       <section className="min-h-screen bg-[var(--background)] px-6 py-3">
         <div className="max-w-6xl mx-auto">
           {/* HEADER */}
-          <div className="mb-4">
-            <div className="flex items-center gap-2">
-              <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--foreground)]">
-                Owner Control
-              </h1>
-
-              {/* Accent status dot */}
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-            </div>
-
-            <p className="mt-0.5 text-xs md:text-sm text-[var(--muted)] max-w-lg leading-snug">
-              Manage your customers, sales, and settings here.
-            </p>
-          </div>
-
-
-          {/* BALANCE */}
-          <div className="
-  mb-6
-  relative
-  rounded-xl
-  border border-[var(--border)]
-  bg-[var(--card)]
-  px-5 py-4
-">
-
-            {/* Top accent bar */}
-            <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[var(--accent)] to-purple-500 rounded-t-xl" />
-
-            <p className="text-xs uppercase tracking-wide text-[var(--muted)]">
-              My Funds
-            </p>
-
-            <div className="mt-1 flex items-end gap-2">
-              <p className="text-2xl font-bold text-[var(--foreground)]">
-                {balance !== null ? balance : "Loading…"}
+          <div className="mb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--foreground)]">
+                  Owner Control
+                </h1>
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+              </div>
+              <p className="mt-0.5 text-[10px] md:text-xs text-[var(--muted)] max-w-lg leading-snug">
+                Manage your customers, sales, and settings here.
               </p>
+            </div>
 
-              <span className="text-sm font-medium text-green-500">
-                Ready to spend
-              </span>
+            <div className="px-4 py-2 rounded-xl border border-[var(--border)] bg-[var(--card)] flex flex-col min-w-[120px] relative overflow-hidden group hover:border-[var(--accent)]/30 transition-all">
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-[var(--accent)] to-purple-500" />
+              <p className="text-[10px] uppercase font-bold text-[var(--muted)]/60 tracking-wider">My Funds</p>
+              <div className="flex items-baseline gap-1.5 mt-0.5">
+                <span className="text-lg font-black text-[var(--foreground)] tabular-nums">{balance !== null ? balance : "..."}</span>
+                <span className="text-[9px] font-bold text-emerald-500/80 uppercase">Ready</span>
+              </div>
             </div>
           </div>
 
 
-          <div className="mb-5 flex flex-wrap gap-2">
+          <div className="mb-4 flex flex-wrap gap-1.5">
             {["wallet", "redeem", "users", "api-keys", "orders", "transactions", "queries", "pricing", "banners", "settings"].map(
               (tab) => {
                 const isActive = activeTab === tab;

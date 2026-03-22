@@ -176,7 +176,7 @@ export default function UsersTab() {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6 pb-10">
+    <div className="space-y-3 sm:space-y-4 pb-10">
       {/* ================= HEADER ================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -393,62 +393,62 @@ export default function UsersTab() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.03 }}
                   onClick={() => setSelectedUser(u)}
-                  className="p-5 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.04] transition-all relative"
+                  className="p-4 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.04] transition-all relative"
                 >
-                  <div className="flex justify-between items-start mb-4 gap-3">
+                  <div className="flex justify-between items-start mb-3 gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                      <Avatar user={u} />
-                      <div className="min-w-0">
-                        <p className="font-bold text-[var(--foreground)] text-[13px] truncate">{u.name}</p>
+                      <div className="shrink-0 scale-90 -ml-1">
+                        <Avatar user={u} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-bold text-[var(--foreground)] text-[12px] md:text-[13px] truncate uppercase tracking-tight">{u.name}</p>
                         <p className="text-[10px] text-[var(--muted)]/40 font-mono truncate">{u.userId}</p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end gap-1.5 shrink-0">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[9px] font-black uppercase tracking-widest ${getRoleClass(u.userType)}`}>
-                        {getRoleIcon(u.userType)}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <span className={`inline-flex items-center px-3 py-1 rounded-xl border text-[9px] font-black uppercase tracking-widest ${getRoleClass(u.userType)}`}>
                         {u.userType}
                       </span>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--muted)] text-[9px] font-black uppercase tracking-widest">
-                        <Activity size={10} className="text-[var(--accent)]" />
-                        {u.totalOrders || 0} Orders
+                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03] text-[var(--accent)] text-[9px] font-black uppercase tracking-widest">
+                        {u.totalOrders || 0}
                       </span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2.5 text-[var(--muted)]/60">
-                        <Mail size={12} className="shrink-0 text-[var(--accent)]" />
-                        <span className="text-[11px] font-medium break-all">{u.email}</span>
+                  <div className="space-y-2 mb-3">
+                    <div className="flex items-center gap-2 text-[var(--muted)]/70">
+                      <Mail size={12} className="shrink-0 text-[var(--accent)]/50" />
+                      <span className="text-[11px] font-medium truncate">{u.email}</span>
+                    </div>
+                    {u.phone && (
+                      <div className="flex items-center gap-2 text-[var(--muted)]/70">
+                        <Phone size={11} className="shrink-0 text-[var(--accent)]/50" />
+                        <span className="text-[11px] font-medium">{u.phone}</span>
                       </div>
-                      {u.phone && (
-                        <div className="flex items-center gap-2.5 text-[var(--muted)]/60">
-                          <Phone size={12} className="shrink-0 text-[var(--accent)]" />
-                          <span className="text-[11px] font-medium">{u.phone}</span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 pt-3 border-t border-[var(--border)]/30" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1.5 text-[var(--muted)]/30">
+                        <Calendar size={12} />
+                        <span className="text-[10px] font-bold tabular-nums">{new Date(u.createdAt).toLocaleDateString()}</span>
+                      </div>
+                      {u.lastLogin && (
+                        <div className="flex items-center gap-1.5 text-[var(--accent)]/30">
+                          <Activity size={12} />
+                          <span className="text-[10px] font-bold tabular-nums">
+                            {new Date(u.lastLogin).toLocaleDateString()}
+                          </span>
                         </div>
                       )}
                     </div>
-
-                    <div className="flex items-center justify-between gap-4 pt-3 border-t border-[var(--border)]" onClick={(e) => e.stopPropagation()}>
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1.5 text-[var(--muted)]/40">
-                          <Calendar size={10} />
-                          <span className="text-[9px] font-bold uppercase tracking-tighter">{new Date(u.createdAt).toLocaleDateString()}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[var(--accent)]/40">
-                          <Activity size={10} />
-                          <span className="text-[9px] font-bold uppercase tracking-tighter">
-                            {u.lastLogin ? new Date(u.lastLogin).toLocaleDateString() : "Never"}
-                          </span>
-                        </div>
-                      </div>
-                      <RoleDropdown
-                        value={u.userType}
-                        compact
-                        disabled={updatingUserId === u.userId || u.userType === "owner"}
-                        onChange={(v) => changeUserRole(u.userId, v)}
-                      />
-                    </div>
+                    <RoleDropdown
+                      value={u.userType}
+                      compact
+                      disabled={updatingUserId === u.userId || u.userType === "owner"}
+                      onChange={(v) => changeUserRole(u.userId, v)}
+                    />
                   </div>
                 </motion.div>
               ))}
@@ -710,9 +710,9 @@ function RoleDropdown({ value, onChange, disabled, compact }) {
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
         className={`
-          flex items-center justify-between gap-3 px-4
-          ${compact ? "h-9 w-[100px]" : "h-11 min-w-[130px] w-full"}
-          rounded-full border border-[var(--border)] bg-[var(--foreground)]/[0.03]
+          flex items-center justify-between gap-2 px-3
+          ${compact ? "h-8 w-[95px]" : "h-11 min-w-[130px] w-full"}
+          rounded-xl border border-[var(--border)] bg-[var(--foreground)]/[0.03]
           text-[10px] font-black uppercase tracking-tight transition-all outline-none
           ${disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-[var(--foreground)]/[0.06]"}
           ${isOpen ? "border-[var(--accent)] ring-1 ring-[var(--accent)]/30" : "text-[var(--foreground)]"}
@@ -731,7 +731,7 @@ function RoleDropdown({ value, onChange, disabled, compact }) {
             initial={{ opacity: 0, scale: 0.95, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 5 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            className="absolute z-[1200] right-0 mt-1 w-full min-w-[150px] rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-2xl p-1.5 overflow-hidden backdrop-blur-xl"
+            className="absolute z-[1200] right-0 mt-1 w-full min-w-[130px] rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-2xl p-1.5 overflow-hidden backdrop-blur-xl"
           >
             {roles.map((role) => (
               <button

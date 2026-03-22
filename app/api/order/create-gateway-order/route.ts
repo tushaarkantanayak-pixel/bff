@@ -234,7 +234,7 @@ export async function POST(req: Request) {
 
     /* ---------- ORDER ID ---------- */
     const orderId =
-      "TOPUP" +
+      "BLUEBUFFTK" +
       Date.now().toString(36).toUpperCase() +
       crypto.randomBytes(6).toString("hex").toUpperCase();
 

@@ -232,7 +232,7 @@ export default function StatsTab() {
     }, [walletPage, walletSearch, activeTab]);
 
     return (
-        <div className="space-y-4 sm:space-y-8 pb-10">
+    <div className="space-y-3 sm:space-y-4 pb-10">
 
             {/* HEADER */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

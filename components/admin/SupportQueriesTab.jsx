@@ -144,7 +144,7 @@ export default function SupportQueriesTab() {
   const getStatus = (status) => status || "open";
 
   return (
-    <div className="space-y-6 pb-6 px-4 md:px-0 max-w-full overflow-x-hidden">
+    <div className="space-y-4 pb-10 px-4 md:px-0 max-w-full overflow-x-hidden">
       {/* ================= HEADER ================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

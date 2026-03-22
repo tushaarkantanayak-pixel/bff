@@ -173,7 +173,7 @@ export default function OrdersTab() {
   };
 
   return (
-    <div className="space-y-6 pb-10">
+    <div className="space-y-4 pb-10">
       {/* ================= HEADER ================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -410,49 +410,47 @@ export default function OrdersTab() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: idx * 0.03 }}
                     onClick={() => setSelectedOrder(o)}
-                    className="p-5 rounded-[1.8rem] border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.05] transition-all"
+                    className="p-4 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] active:bg-[var(--foreground)]/[0.05] transition-all"
                   >
-                    <div className="flex justify-between items-start mb-4">
+                    <div className="flex justify-between items-start mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--accent)]">
-                          <Gamepad2 size={16} />
+                        <div className="w-9 h-9 rounded-xl bg-[var(--foreground)]/[0.05] flex items-center justify-center text-[var(--accent)] shrink-0">
+                          <Gamepad2 size={18} />
                         </div>
-                        <div className="flex flex-col">
-                          <p className="font-bold text-[var(--foreground)] uppercase text-xs tracking-tight">{o.gameSlug}</p>
-                          <p className="text-[10px] text-[var(--muted)] lowercase">{o.email || 'guest'}</p>
+                        <div className="min-w-0">
+                          <p className="font-bold text-[var(--foreground)] uppercase text-[11px] tracking-tight truncate max-w-[140px]">{o.gameSlug}</p>
+                          <p className="text-[10px] text-[var(--muted)]/60 truncate max-w-[140px]">{o.email || 'guest'}</p>
                         </div>
                       </div>
                       <div className="text-right">
                         <span className="text-lg font-black text-emerald-500 block">₹{o.price}</span>
-                        <span className="text-[8px] font-bold uppercase text-[var(--muted)] tracking-widest">{o.paymentMethod || 'N/A'}</span>
+                        <span className="text-[8px] font-bold uppercase text-[var(--muted)]/40 tracking-[0.1em]">{o.paymentMethod || 'N/A'}</span>
                       </div>
                     </div>
 
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-[11px] font-medium text-[var(--foreground)]/60 line-clamp-1 italic">"{o.itemName}"</p>
-                        <p className="text-[9px] font-mono text-[var(--muted)] mt-1 uppercase">{o.orderId}</p>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-4 pt-1" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex items-center gap-2">
-                          <Calendar size={12} className="text-[var(--muted)]/40" />
-                          <span className="text-[10px] font-bold text-[var(--muted)]/60">{new Date(o.createdAt).toLocaleDateString()}</span>
+                    <div className="flex items-center justify-between gap-3 pt-3 border-t border-[var(--border)]/30" onClick={(e) => e.stopPropagation()}>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[10px] font-bold text-[var(--foreground)]/70 truncate">"{o.itemName}"</p>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <span className="text-[8px] font-mono text-[var(--muted)]/40 uppercase tracking-tighter truncate max-w-[100px]">{o.orderId}</span>
+                            <div className="w-1 h-1 rounded-full bg-[var(--border)] shrink-0" />
+                            <Calendar size={10} className="text-[var(--muted)]/30 shrink-0" />
+                            <span className="text-[9px] font-bold text-[var(--muted)]/40 uppercase whitespace-nowrap">{new Date(o.createdAt).toLocaleDateString()}</span>
+                          </div>
                         </div>
 
-                        <StatusDropdown
-                          value={o.status}
-                          disabled={updating}
-                          onChange={(v) => updateOrderStatus(o.orderId, v)}
-                          compact
-                          options={[
-                            { value: "pending", label: "Pending" },
-                            { value: "success", label: "Success" },
-                            { value: "failed", label: "Failed" },
-                            { value: "refund", label: "Refund" },
-                          ]}
-                        />
-                      </div>
+                      <StatusDropdown
+                        value={o.status}
+                        disabled={updating}
+                        onChange={(v) => updateOrderStatus(o.orderId, v)}
+                        compact
+                        options={[
+                          { value: "pending", label: "Pending" },
+                          { value: "success", label: "Success" },
+                          { value: "failed", label: "Failed" },
+                          { value: "refund", label: "Refund" },
+                        ]}
+                      />
                     </div>
                   </motion.div>
                 );
