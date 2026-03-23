@@ -11,102 +11,104 @@ export default function GameCardList({ game, isOutOfStock, index = 0 }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{
-        delay: index * 0.03,
-        type: "spring",
-        stiffness: 260,
-        damping: 25
-      }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      className="w-full"
     >
       <Link
         href={disabled ? "#" : `/games/${game.gameSlug}`}
-        className={`group relative flex items-center gap-5 p-4 rounded-3xl border transition-all duration-500
+        className={`group relative flex items-center gap-4 sm:gap-6 p-3 sm:p-5 rounded-3xl transition-all duration-500
         ${disabled
-            ? "opacity-50 grayscale cursor-not-allowed border-[var(--border)] bg-[var(--background)]/50"
-            : "border-[var(--border)] bg-[var(--card)]/40 backdrop-blur-xl hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/5 hover:translate-x-2 shadow-sm hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.3)]"
+            ? "opacity-50 grayscale cursor-not-allowed border border-[var(--border)] bg-[var(--card)]/30"
+            : "bg-[var(--card)]/40 border border-[var(--border)] hover:border-[var(--accent)]/30 hover:bg-[var(--card)] shadow-2xl"
           }`}
       >
-        {/* AVATAR SYSTEM */}
+        {/* Glow Element */}
+        {!disabled && (
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-32 h-32 bg-[var(--accent)]/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        )}
+
+        {/* IMAGE SECTION */}
         <div className="relative flex-shrink-0">
           <div className={`
-            relative w-20 h-20 rounded-2xl overflow-hidden border-2 z-10
-            ${disabled ? "border-[var(--muted)]" : "border-[var(--accent)]/20 group-hover:border-[var(--accent)] transition-colors duration-500"}
+            relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border transition-all duration-700
+            ${disabled ? "border-[var(--border)]" : "border-[var(--border)] group-hover:border-[var(--accent)]/50 group-hover:scale-105"}
           `}>
-            <Image
+             <Image
               src={game.gameImageId?.image || logo}
               alt={game.gameName}
               fill
-              sizes="80px"
-              className={`object-cover transition-transform duration-700
-                ${disabled ? "" : "group-hover:scale-110 group-hover:rotate-2"}
-              `}
+              sizes="(max-width: 640px) 64px, 80px"
+              className="object-cover"
             />
           </div>
-          {/* Ambient Glow behind Image */}
+          
+          {/* Badge on Image overlay */}
           {!disabled && (
-            <div className="absolute inset-0 bg-[var(--accent)] blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+            <div className="absolute -top-1.5 -right-1.5 bg-[var(--accent)] text-black p-1 rounded-lg shadow-lg z-20">
+               <FiZap size={10} fill="currentColor" />
+            </div>
           )}
         </div>
 
-        {/* INFO SYSTEM */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1.5 leading-none">
+        {/* CONTENT SECTION - VERTICALLY CENTERED */}
+        <div className="flex-1 min-w-0 flex flex-col justify-center py-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
             <h3
-              className={`text-sm sm:text-base font-black uppercase tracking-[0.05em] italic transition-colors
+              className={`text-sm sm:text-base font-black uppercase tracking-tight italic transition-all duration-500
               ${disabled ? "text-[var(--muted)]" : "text-[var(--foreground)] group-hover:text-[var(--accent)]"}`}
             >
               {game.gameName}
             </h3>
-            {!disabled && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                className="p-1 rounded-md bg-[var(--accent)]/10 text-[var(--accent)]"
-              >
-                <FiZap size={10} />
-              </motion.div>
-            )}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              <FiShield size={10} className="text-[var(--muted)]" />
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">{game.gameFrom}</p>
-            </div>
-
+            
+            {/* Tag next to Title */}
             {!disabled && game.tagId && (
               <span
-                className="text-[8px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/5 shadow-xl flex items-center gap-1.5"
+                className="text-[7px] sm:text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-md border border-[var(--border)]"
                 style={{
-                  background: `${game.tagId.tagBackground}cc`,
+                  background: `${game.tagId.tagBackground}15`,
                   color: game.tagId.tagColor,
                 }}
               >
-                {game.tagId.tagName === "Manual" && <FiZap size={10} fill="currentColor" />}
                 {game.tagId.tagName}
               </span>
             )}
           </div>
+          
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] opacity-60">
+              <FiShield size={10} />
+              {game.gameFrom}
+            </span>
+            <div className="w-1 h-1 rounded-full bg-[var(--muted)]/20" />
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-[var(--accent)] opacity-80">
+              Instant
+            </span>
+          </div>
         </div>
 
-        {/* ACTION / STATUS SYSTEM */}
-        <div className="flex flex-col items-end gap-2 pr-2">
+        {/* ACTION SECTION */}
+        <div className="flex-shrink-0 flex items-center pr-1 sm:pr-2">
           {disabled ? (
-            <span className="px-3 py-1.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-[9px] font-black uppercase tracking-widest italic">
+            <span className="px-3 py-1.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-[8px] font-black uppercase tracking-widest italic">
               Out of Stock
             </span>
           ) : (
-            <div className="w-10 h-10 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)] border border-[var(--accent)]/20 transition-all group-hover:bg-[var(--accent)] group-hover:text-black group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)]">
-              <FiArrowRight size={18} />
+            <div className={`
+               w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center transition-all duration-500
+               ${disabled 
+                 ? "bg-[var(--card)]/50 text-[var(--muted)]/30" 
+                 : "bg-[var(--accent)]/5 text-[var(--foreground)] border border-[var(--border)] group-hover:bg-[var(--accent)] group-hover:text-white group-hover:scale-110 group-hover:border-[var(--accent)] group-hover:shadow-[0_0_20px_var(--accent)]/30"}
+            `}>
+               <FiArrowRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
             </div>
           )}
         </div>
 
-        {/* HOVER GLOW BAR */}
+        {/* BOTTOM ACCENT BAR */}
         {!disabled && (
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 group-hover:h-2/3 bg-[var(--accent)] rounded-full transition-all duration-300 shadow-[0_0_10px_var(--accent)]" />
+          <div className="absolute bottom-0 left-6 right-6 h-[2.5px] bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
         )}
       </Link>
     </motion.div>

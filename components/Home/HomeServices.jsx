@@ -58,7 +58,7 @@ export default function HomeServices() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="min-w-[280px] md:min-w-[320px] snap-center group relative p-6 rounded-[32px] bg-gradient-to-br from-[var(--card)]/60 to-transparent backdrop-blur-md border border-white/5 hover:border-[var(--accent)]/30 transition-all duration-500 flex flex-col items-start shadow-2xl"
+              className="min-w-[260px] md:min-w-[280px] snap-center group relative p-6 rounded-[32px] bg-gradient-to-br from-[var(--card)]/60 to-transparent backdrop-blur-md border border-white/5 hover:border-[var(--accent)]/30 transition-all duration-500 flex flex-col items-start shadow-2xl"
             >
               {/* Icon Container */}
               <div className="w-12 h-12 rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center text-[var(--accent)] group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 mb-6">

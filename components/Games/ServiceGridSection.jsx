@@ -49,8 +49,8 @@ export default function ServiceGridSection({
         <div className="flex-1 h-px bg-gradient-to-r from-[var(--border)] to-transparent" />
       </motion.div>
 
-      {/* GRID SYSTEM (Match GameCardGrid 3 in a Row) */}
-      <div className="grid grid-cols-3 gap-3 md:gap-5">
+      {/* GRID SYSTEM (Responsive) */}
+      <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-5">
         {items.map((item, index) => (
           <motion.div
             key={item.slug}
