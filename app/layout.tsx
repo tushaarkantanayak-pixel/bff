@@ -181,6 +181,9 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   verification: {
     google: "QWK_nNCNa9UOVWVpaOf5Ux5GkTuUKhRZndHGDNfMoj8",
+    other: {
+      "trustpilot-one-time-domain-verification-id": ["de4375ec-0612-4059-9d56-8ad250724a94"],
+    },
   },
 };
 

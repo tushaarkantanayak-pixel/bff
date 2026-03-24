@@ -100,4 +100,9 @@ export const metadata: Metadata = {
         index: true,
         follow: true,
     },
+    verification: {
+        other: {
+            "trustpilot-one-time-domain-verification-id": ["de4375ec-0612-4059-9d56-8ad250724a94"],
+        },
+    },
 };
